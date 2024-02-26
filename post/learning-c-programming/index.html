@@ -1,0 +1,398 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>我的cpp的算法学习笔记 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="我的cpp的算法学习笔记 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="来自大学课程的一封启示。
+在专攻硬件这条路上算是越走越远了啊，硬件会不会要走得更远一点？因为要接触底层，那么更需要学会一些强类型的语言。C，我来了
+
+
+纯属是个人笔记，想到多少写多少，各位看官勿怪。
+写了一部分以后就没写了，东西很浅，就是入..." />
+    <meta name="keywords" content="C++,C语言" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              我的cpp的算法学习笔记
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-22
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/0iLWKyxDwp/" class="post-tag">
+                  # C++
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/SVO4qOajZ2/" class="post-tag">
+                  # C语言
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>来自大学课程的一封启示。</p>
+<p>在专攻硬件这条路上算是越走越远了啊，硬件会不会要走得更远一点？因为要接触底层，那么更需要学会一些强类型的语言。C，我来了</p>
+<!-- more -->
+<blockquote>
+<p>纯属是个人笔记，想到多少写多少，各位看官勿怪。<br>
+写了一部分以后就没写了，东西很浅，就是入个门。</p>
+</blockquote>
+<h2 id="在一切的最初">在一切的最初</h2>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20220923120105.png" alt="pic" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20220923120534.png" alt="近距离神魔打架" loading="lazy"></figure>
+<h2 id="言归正传">言归正传</h2>
+<p>编写C++的一些IDE一般有 Dev-Cpp, CLion, Visual Studio</p>
+<p><a href="https://visualstudio.microsoft.com/zh-hans/">Microsoft Visual Studio</a> 应该算是比较熟悉的了，当然不是 <a href="https://code.visualstudio.com/">Visual Studio Code</a>。</p>
+<p>小项目使用 <a href="https://github.com/Embarcadero/Dev-Cpp/">Dev-Cpp</a><br>
+大项目使用 <a href="https://www.jetbrains.com/clion/">CLion</a></p>
+<p>在学习一门语言的时候我们总是习惯去输出他。</p>
+<figure data-type="image" tabindex="3"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20220923120737.png" alt="pic" loading="lazy"></figure>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+int main() {
+ float a,b,c,d,e,f,g;
+ scanf(&quot;%f %f %f %f %f %f %f&quot;, &amp;a,&amp;b,&amp;c,&amp;d,&amp;e,&amp;f,&amp;g);
+ printf(&quot;%.2f&quot;,(a+b+c+d+e+f+g)/7);
+ return 0;
+}
+</code></pre>
+<p>这其实就是一个简单的均值求法。</p>
+<p>每一个语言都有它的魅力，比如C++，令人难以理解的运算速度是超越其他语言的绝对优势。</p>
+<h2 id="语言经典的循环">语言经典的循环</h2>
+<p>每一个语言必不可少的东西，进阶后就是迭代器，遍历的算法在大型项目中非常常见（结论来自我做过的其他项目）</p>
+<h3 id="for">for()</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+int main() {
+ int a;
+ scanf(&quot;%d&quot;, &amp;a);
+ for (int i = 0;i &lt; 5;i++){
+  printf(&quot;%d&quot;, a);
+  if (i &lt; 4) printf(&quot; &quot;);
+  a = 2 * a + 1;
+ }
+ return 0;
+}
+</code></pre>
+<h4 id="求这个分数序列的前n项之和">求这个分数序列的前n项之和</h4>
+<p><strong>题目：有一个分数序列 q1/p1,q2/p2,q3/p3,q4/p4,q5/p5,.... ,其中qi+1= qi+ pi, pi+1=qi, p1= 1, q1= 2。比如这个序列前6项分别是2/1,3/2,5/3,8/5,13/8,21/13。求这个分数序列的前n项之和。</strong></p>
+<p><strong>样例输入</strong><br>
+2<br>
+<strong>样例输出</strong><br>
+3.5000</p>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
+int main() {
+ int n;
+ float p[100], q[100], s = 0;
+ scanf(&quot;%d&quot;, &amp;n);
+ for (int i = 0; i &lt; n; i++) {
+  p[i] = (i &gt; 0) ? q[i - 1] : 1;
+  q[i] = (i &gt; 0) ? p[i - 1] + q[i - 1] : 2;
+  s += q[i] / p[i];
+ }
+ printf(&quot;%.4f&quot;, s);
+ return 0;
+}
+</code></pre>
+<h4 id="从键盘输入5个数找出其最大数并输出">从键盘输入5个数，找出其最大数并输出</h4>
+<p><strong>样例输入</strong><br>
+2 3 4 7 5<br>
+<strong>样例输出</strong><br>
+7</p>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
+int max(int a, int b) {
+ return  a &gt; b ? a : b;
+}
+
+int main() {
+ int m = 5, a[m], t = 0;
+ scanf(&quot;%d %d %d %d %d&quot;, &amp;a[0], &amp;a[1], &amp;a[2], &amp;a[3], &amp;a[4]);
+ for (int n = 0; n &lt; m; n++) {
+  t = max(a[n], t);
+ }
+ printf(&quot;%d&quot;, t);
+ return 0;
+}
+</code></pre>
+<h4 id="求n的正整数的阶乘的和">求n的正整数的阶乘的和</h4>
+<p><strong>样例输入</strong><br>
+5<br>
+<strong>样例输出</strong><br>
+153</p>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
+int main() {
+ long long int n, s = 0;
+ scanf(&quot;%lld&quot;, &amp;n);
+ for (int i = 1; i &lt;= n; i++) {
+  int c = 1;
+  for (int v = 1; v &lt;= i; v++) {
+   c *= v;
+  }
+  s += c;
+ }
+ printf(&quot;%lld&quot;, s);
+ return 0;
+}
+</code></pre>
+<h4 id="绕啊绕绕啊绕绕啊绕">绕啊绕绕啊绕绕啊绕</h4>
+<p>请统计某个给定范围[L, R]的所有整数中，数字2出现的次数。<br>
+比如给定范围[2, 22]，数字2在数2中出现了1次，在数12中出现1次，在数20中出现1次，在数21中出现1次，在数22中出现2次，所以数字2在该范围内一共出现了6次。</p>
+<p><strong>样例输入</strong><br>
+2 22<br>
+<strong>样例输出</strong><br>
+6</p>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
+int count(int n) {
+ int i;
+ for (i = 0; n &gt; 0; n /= 10)
+ {
+  if (n % 10 == 2) i++;
+ }
+ return i;
+}
+
+int main() {
+ int a, b, c = 0;
+ scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+ for (int i = a; i &lt;= b; i++)
+ {
+  c += count(i);
+ }
+ printf(&quot;%d&quot;, c);
+ return 0;
+}
+</code></pre>
+<h4 id="你真的懂语法吗">你真的懂语法吗？</h4>
+<figure data-type="image" tabindex="4"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221105203547.png" alt="pic" loading="lazy"></figure>
+<h3 id="do-while">do while()</h3>
+<p>根据条件来循环语句。<br>
+阶乘相加的算法。</p>
+<pre><code class="language-cpp">// 题目：求1!+2!+3!+4!+…+n!的结果。n！=n*(n-1)*(n-2)*...2*1
+#include &lt;iostream&gt;
+int main() {
+ int a;
+ while(scanf(&quot;%d&quot;, &amp;a) != EOF) {
+  int d = 0;
+  for (int b = 1; b &lt;= a; b++) {
+   int e = 1;
+   for (int c = 1; c &lt;= b; c++) {
+    e *= c; 
+   }
+   d += e;
+  }
+  printf(&quot;%d\n&quot;, d);
+ } 
+ return 0;
+}
+</code></pre>
+<h2 id="库和包我习惯的叫法">库和包（我习惯的叫法）</h2>
+<p>OJ平台上并不允许引用其他的包，所以使用基础方法去解决一些问题的时候会很头疼（平常倒也不用那么死脑筋，有轮子不用是**，不过学习的时候就得好好学）</p>
+<h3 id="mathh-stdioh">math.h stdio.h</h3>
+<p>在哪里？自动生成在程序目录里面吗？<br>
+其它库函数标准文件呢？<br>
+那为什么，生成目录没有这文件、、却可以运行？</p>
+<p>不完全统计，C语言标准库中的头文件有15个之多，所以我主要介绍常用的这四个头文件stdio.h，string.h，math.h，stdlib.h。</p>
+<p>他们都被存放于用户所带的<code>C:\Program Files\Microsoft Visual Studio\VC98\Include</code></p>
+<p>他们各个被定义的方法都不同，已经有很多教材对这些进行了整理。（那么这里就不多做赘述了）</p>
+<h2 id="scanf有什么特点">scanf()有什么特点</h2>
+<p>如果要单独拿一个字符（数字）</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+ int a, b;
+ scanf(&quot;%1d%1d&quot;, &amp;a, &amp;b); // 38
+ printf(&quot;%d和%d&quot;, a, b); // 3和8
+ return 0;
+}
+</code></pre>
+<h2 id="函数">函数</h2>
+<p>不同于数学中的函数的是，他将步骤进行分开，主要放大了其中的运行逻辑。</p>
+<pre><code class="language-cpp">// 下面有所体现
+#include &lt;iostream&gt;
+
+void fn() {
+ // 这里定义了一个 fn() 函数
+ return;
+}
+
+int main() {
+ fn(); // 这里调用了fn()
+ return 0;
+}
+</code></pre>
+<p>其中，能看出 <code>void fn()</code> “fn”是函数名， “void”是函数将要返回的类型。</p>
+<blockquote>
+<p>int main(void) 是标准形式，这么写时，结尾要加 return 0; 其实怎么写都可以，主要是看你的编译器。（来自“百度”）</p>
+</blockquote>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%9C%A8%E4%B8%80%E5%88%87%E7%9A%84%E6%9C%80%E5%88%9D">在一切的最初</a></li>
+<li><a href="#%E8%A8%80%E5%BD%92%E6%AD%A3%E4%BC%A0">言归正传</a></li>
+<li><a href="#%E8%AF%AD%E8%A8%80%E7%BB%8F%E5%85%B8%E7%9A%84%E5%BE%AA%E7%8E%AF">语言经典的循环</a>
+<ul>
+<li><a href="#for">for()</a>
+<ul>
+<li><a href="#%E6%B1%82%E8%BF%99%E4%B8%AA%E5%88%86%E6%95%B0%E5%BA%8F%E5%88%97%E7%9A%84%E5%89%8Dn%E9%A1%B9%E4%B9%8B%E5%92%8C">求这个分数序列的前n项之和</a></li>
+<li><a href="#%E4%BB%8E%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A55%E4%B8%AA%E6%95%B0%E6%89%BE%E5%87%BA%E5%85%B6%E6%9C%80%E5%A4%A7%E6%95%B0%E5%B9%B6%E8%BE%93%E5%87%BA">从键盘输入5个数，找出其最大数并输出</a></li>
+<li><a href="#%E6%B1%82n%E7%9A%84%E6%AD%A3%E6%95%B4%E6%95%B0%E7%9A%84%E9%98%B6%E4%B9%98%E7%9A%84%E5%92%8C">求n的正整数的阶乘的和</a></li>
+<li><a href="#%E7%BB%95%E5%95%8A%E7%BB%95%E7%BB%95%E5%95%8A%E7%BB%95%E7%BB%95%E5%95%8A%E7%BB%95">绕啊绕绕啊绕绕啊绕</a></li>
+<li><a href="#%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82%E8%AF%AD%E6%B3%95%E5%90%97">你真的懂语法吗？</a></li>
+</ul>
+</li>
+<li><a href="#do-while">do while()</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%93%E5%92%8C%E5%8C%85%E6%88%91%E4%B9%A0%E6%83%AF%E7%9A%84%E5%8F%AB%E6%B3%95">库和包（我习惯的叫法）</a>
+<ul>
+<li><a href="#mathh-stdioh">math.h stdio.h</a></li>
+</ul>
+</li>
+<li><a href="#scanf%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9">scanf()有什么特点</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0">函数</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/wechat-inputer/">
+              <h3 class="post-title">
+                都在说这个，那我也来聊聊微信键盘
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

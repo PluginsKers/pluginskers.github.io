@@ -1,0 +1,296 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vue实现的新拟态设计亲戚关系计算器 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Vue实现的新拟态设计亲戚关系计算器 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="它，只是一个计算器。但是，使用了新拟态的样式设计。
+
+
+项目介绍
+它能用来做什么？逢年过节遇到三姑六婆，拒绝叫不出口的尴尬！轻松搞定亲戚关系～
+由于工作生活节奏不同，如今很多关系稍疏远的亲戚之间来往并不多。因此放假回家过年时，往往会搞不清楚..." />
+    <meta name="keywords" content="Neumorphism" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Vue实现的新拟态设计亲戚关系计算器
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-08-19
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/YnVT39tTgx/" class="post-tag">
+                  # Neumorphism
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>它，只是一个计算器。但是，使用了新拟态的样式设计。</p>
+<!--more-->
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221027101622.png" alt="cover" loading="lazy"></figure>
+<h2 id="项目介绍">项目介绍</h2>
+<p>它能用来做什么？逢年过节遇到三姑六婆，拒绝叫不出口的尴尬！轻松搞定亲戚关系～</p>
+<p>由于工作生活节奏不同，如今很多关系稍疏远的亲戚之间来往并不多。因此放假回家过年时，往往会搞不清楚哪位亲戚应该喊什么称呼，很是尴尬。然而搞不清亲戚关系和亲戚称谓的不仅是小孩，就连年轻一代的大人也都常常模糊混乱。</p>
+<p>主要是？轻量！轻量！还是轻量。</p>
+<h2 id="链接地址">链接地址</h2>
+<p><a href="https://kinship.i5res.com/">https://kinship.i5res.com/</a></p>
+<p>亲属是基于婚姻、血缘和法律拟制而形成的社会关系。亲属关系包括夫妻、父母、子女、兄弟姊妹、祖父母和外祖父母、孙子女和外孙子女、儿媳和公婆、女婿和岳父母、以及其他三代以内的旁系血亲，如伯、叔、姑、舅、姨、侄子女、甥子女、堂兄弟姊妹、表兄弟姊妹等。</p>
+<p>亲属称谓指是以本人为中心确定亲族成员和本人关系的名称，是基于血亲姻亲基础上的亲属之间相互称呼的名称、叫法。汉族的家族亲属关系条理分明尊卑有序：比自己长一辈的称呼有姨姑舅叔伯，同辈的有兄弟姊妹、堂表亲等等，下一辈有甥侄等等。中国人由于姻亲而产生的亲戚关系相当庞杂，“祖宗十八代”、“五服”、“六亲”、“九族”让人难以区分，其派生出的各种称谓也是中华文化的一大特征。</p>
+<p>如今由于工作生活节奏差异，很多关系稍疏远的亲戚之间来往并不多，年龄差异长幼辈分模糊。春节拜年走亲戚遇到七大姑八大姨，往往会搞不清楚哪位亲戚应该喊什么称呼，很是尴尬。不仅小孩搞不清亲戚关系和亲戚称&gt;谓，就连年轻一代的大人也都常常模糊混乱。</p>
+<p>“中国亲戚关系计算器”为你避免了叫错、不会叫亲戚的尴尬，收录了中国亲戚关系称呼大全，只需简单的输入即可完成称呼计算。称呼计算器同时兼容了不同地域的方言叫法，你可以称呼父亲为：“老爸”、“爹地”、“老爷&gt;子”等等。让您准确的叫出亲戚称谓，理清亲属之间的亲戚关系，轻松掌握中国式的亲戚关系换算，让你更了解中国文化。</p>
+<h2 id="算法开源">算法开源</h2>
+<p>感谢 <a href="https://github.com/mumuy/relationship">mumuy</a> 大佬的项目！</p>
+<p>本项目致力于让更多人了解中国传统文化，学习各式各样的中国亲戚称谓。本人深感项目的完善仅凭一己之力是远远不够的，如果你对此感兴趣，欢迎关注本项目。你也可以通过本项目提供的方法和教程，打造更符合自己使用习惯的亲戚计算器版本。</p>
+<p>算法基于「MIT许可协议」开源，除需在源码中保留版权信息和许可声明外，你有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。算法持续更新中，如发现错漏或有想法建议可在此 <a href="https://github.com/mumuy/relationship/issues">反馈问题</a>。</p>
+<h2 id="算法实现">算法实现</h2>
+<h3 id="常见问题">常见问题</h3>
+<p>市面上同类型的算法基本以 “称谓-直接关系-称谓” 的方式实现，如：</p>
+<pre><code class="language-txt">&quot;爸爸&quot;: {
+    &quot;爸爸&quot;: &quot;爷爷&quot;,
+    &quot;妈妈&quot;: &quot;奶奶&quot;,
+    &quot;哥哥&quot;: &quot;伯父&quot;,
+    &quot;弟弟&quot;: &quot;叔叔&quot;,
+    &quot;姐姐&quot;: &quot;姑妈&quot;,
+    &quot;妹妹&quot;: &quot;姑妈&quot;,
+    &quot;丈夫&quot;: &quot;未知&quot;,
+    &quot;妻子&quot;: &quot;妈妈&quot;,
+    &quot;儿子&quot;: {&quot;older&quot;: &quot;哥哥&quot;, 'middle': &quot;我&quot;, &quot;younger&quot;: &quot;弟弟&quot;},
+    &quot;女儿&quot;: {&quot;older&quot;: &quot;姐姐&quot;, 'middle': &quot;我&quot;, &quot;younger&quot;: &quot;妹妹&quot;}
+}
+</code></pre>
+<p>这样的结构主要有以下问题：</p>
+<ol>
+<li>无法跨代直接查询，如：如何知道“舅妈的婆婆”是谁？</li>
+<li>无法逆向查询称谓，如：“表哥的妈妈”的妈妈是“舅妈”、“姨妈”还是“姑妈”</li>
+<li>数据结构过于臃肿, 如：某个节点下可能会出现多个“未知”</li>
+<li>无法兼容多种称呼，如：各地称呼不尽相同，“爸爸”也可以叫“父亲”、“爹地”</li>
+<li>无法进行关系拓扑，如：“舅妈”和我什么关系？</li>
+</ol>
+<h3 id="本算法的原理">本算法的原理</h3>
+<p>采用 “关系链-称谓集合” 哈希对的方式建立数据库，映射亲戚网络中的每个节点和自己的关系</p>
+<h4 id="数据结构">数据结构</h4>
+<pre><code class="language-txt">'h':['老公','丈夫','先生','官人','男人','汉子','夫','夫君','相公','夫婿','爱人','老伴'],
+'h,f':['公公','翁亲','老公公'],
+</code></pre>
+<p>每个称谓都可以找到相应的关系链，每个关系链同时有对应的称谓集合，这里需要引入自己“发明”的特殊语法标记</p>
+<h4 id="语法说明">语法说明</h4>
+<pre><code class="language-txt">【关系】f:父,m:母,h:夫,w:妻,s:子,d:女,xb:兄弟,ob:兄,lb:弟,xs:姐妹,os:姐,ls:妹
+【修饰符】 1:男性,0:女性,&amp;o:年长,&amp;l:年幼,#:隔断,[a|b]:并列
+</code></pre>
+<p>例如：</p>
+<p>&quot;f&quot;对应着爸爸，那么：&quot;f,m&quot;对应着奶奶,&quot;f,f&quot;对应着爷爷；</p>
+<p>这样在查询关系的时候，只需要对关系链进行计算就好了，而不是对称谓进行字典查找</p>
+<h4 id="算法思路">算法思路</h4>
+<ol>
+<li>
+<p>当用户输入“舅妈的婆婆”，可以分解出两个对象“舅妈”和“婆婆”（前者的婆婆）</p>
+</li>
+<li>
+<p>从“关系链-称谓集合”映射关系可知，这两个对象的关系链分别是：&quot;m,xb,w&quot;和&quot;h,m&quot;,合并后的关系即：&quot;m,xb,w,h,m&quot;</p>
+</li>
+<li>
+<p>此时关系链会出现冗余，需要进一步处理：</p>
+<ul>
+<li>
+<p>&quot;w,h&quot;表示“老婆的老公”，即自己，可直接将关系链简化成：&quot;m,xb,m&quot;</p>
+</li>
+<li>
+<p>同理，&quot;xb,m&quot;表示“兄弟的妈妈”，即自己的妈妈，可将关系链再次简化为：&quot;m,m&quot;</p>
+</li>
+<li>
+<p>当无法进一步简化时，就得到了“最简关系链”，将其带入亲戚关系数据库查询，便可知&quot;m,m&quot;即为自己的“奶奶”</p>
+</li>
+</ul>
+</li>
+<li>
+<p>这样就将复杂的关系链转换成直接关系了，除此之外还可根据“关系链-称谓集合”反向通过称呼找到关系；</p>
+</li>
+</ol>
+<h4 id="实现细节">实现细节</h4>
+<p>如何实现关系链的简化？</p>
+<p>关系链为字符串，用正则表达式即可按情形匹配，同时做到“替换”的操作。由于所有非直接的关系，都是存在关系链表达的冗余。虽然冗余可能多层且复杂，只需要考虑两层关系中的去冗余，反复处理即可。</p>
+<p>某些多层关系可能未必对应一种关系，如何解决关系的不唯一？</p>
+<p>“爸爸的儿子”不一定是自己，也可能是自己的兄弟。在语法中引入了“隔断”和“并列”语法，可以借助正则表达式将此类不唯一的关系拆分为多组，每次再单独带入递归求最简解即可。</p>
+<p>每个节点离自己远一层关系，节点数据便翻倍，如何解决数据量过大的问题？</p>
+<p>中国的亲戚关系存在一定规律，旁系分支大体由 分支节点 及其 子代关系 ，我们只需记录 分支节点 和 子代关系 即可。如：“舅表哥”和“堂哥”两者在和自己的关系链上存在一定相似，没必要记录两者所有关系。只需知道“舅表哥”是“舅舅”的后代，而“堂哥”是“叔伯”的后代，那么“舅表哥”和“堂哥”的所有后代及姻亲数据可以只存3部分。即：</p>
+<p>舅表哥关系数据 = 舅舅（分支节点） + 哥哥关系数据（子代关系）；</p>
+<p>堂哥关系数据 = 叔伯（分支节点） + 哥哥关系数据（子代关系）；</p>
+<p>这样的关系有很多，如：“舅表”、“姑表”、“从堂”、“姑表叔表”等等，对关系数据进行拆分复用，即可以达到压缩数据量。同时在脚本运行中对 分支节点 和 子代关系 进行拼接即可组合出数据库。</p>
+<h2 id="关于其他">关于其他</h2>
+<p>他们都在用：</p>
+<p>查询网 <a href="http://www.ip138.com/chengwei/">http://www.ip138.com/chengwei/</a><br>
+在线查询网 <a href="http://qinshu.supfree.net/">http://qinshu.supfree.net/</a><br>
+在线工具 <a href="http://www.atool.org/relateship.php">http://www.atool.org/relateship.php</a><br>
+有道语文达人 <a href="http://dict.youdao.com/k12yuwen/html/relation.html">http://dict.youdao.com/k12yuwen/html/relation.html</a><br>
+小米MIUI系统计算器 <a href="http://www.miui.com/">http://www.miui.com/</a><br>
+小米MIUI网页版本 <a href="http://www.miui.com/zt/calculator2016/dist.php">http://www.miui.com/zt/calculator2016/dist.php</a><br>
+符号库 <a href="http://www.fuhaoku.com/tool/qinqiguanxi.html">http://www.fuhaoku.com/tool/qinqiguanxi.html</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D">项目介绍</a></li>
+<li><a href="#%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接地址</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E5%BC%80%E6%BA%90">算法开源</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0">算法实现</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></li>
+<li><a href="#%E6%9C%AC%E7%AE%97%E6%B3%95%E7%9A%84%E5%8E%9F%E7%90%86">本算法的原理</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></li>
+<li><a href="#%E8%AF%AD%E6%B3%95%E8%AF%B4%E6%98%8E">语法说明</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF">算法思路</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82">实现细节</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%85%B6%E4%BB%96">关于其他</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/guide-to-android-xposed/">
+              <h3 class="post-title">
+                Xposed 新时代要来了，project mainline
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

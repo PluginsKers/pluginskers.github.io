@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pluginskers.github.io</id>
+    <title>PluginsKers&apos;s Blog</title>
+    <updated>2024-02-26T10:58:58.332Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://pluginskers.github.io"/>
+    <link rel="self" href="https://pluginskers.github.io/atom.xml"/>
+    <subtitle>凡心所向 素履所往🌊</subtitle>
+    <logo>https://pluginskers.github.io/images/avatar.png</logo>
+    <icon>https://pluginskers.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, PluginsKers&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[尝试本地部署microsoft/autogen项目]]></title>
+        <id>https://pluginskers.github.io/post/microsoft-autogen-proj-guide/</id>
+        <link href="https://pluginskers.github.io/post/microsoft-autogen-proj-guide/">
+        </link>
+        <updated>2023-10-19T05:04:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>看到官方的概述的时候有点惊讶到了，这更像是LLM分布式集群的感觉，一个Agent下发任务给到多个Agent，但是同以往不一样的是，每一层级的Agent都是能够双相通信，这样的话我前面说到的“层级”其实就是不准确了，它更像是平级的团队。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>看到官方的概述的时候有点惊讶到了，这更像是LLM分布式集群的感觉，一个Agent下发任务给到多个Agent，但是同以往不一样的是，每一层级的Agent都是能够双相通信，这样的话我前面说到的“层级”其实就是不准确了，它更像是平级的团队。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[谈谈ChatGPT和现在的LLM大语言模型]]></title>
+        <id>https://pluginskers.github.io/post/artificial-intelligence/</id>
+        <link href="https://pluginskers.github.io/post/artificial-intelligence/">
+        </link>
+        <updated>2023-03-30T04:04:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>我在2022年年末就知道了这东西，2022年底的略有名气，现在才2023刚开春，GPT-4了？<br>
+我觉得程序员离把自己淘汰越来越近了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>我在2022年年末就知道了这东西，2022年底的略有名气，现在才2023刚开春，GPT-4了？<br>
+我觉得程序员离把自己淘汰越来越近了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转瞬即逝的一年，这一年的结尾]]></title>
+        <id>https://pluginskers.github.io/post/new-year-2023-celebration/</id>
+        <link href="https://pluginskers.github.io/post/new-year-2023-celebration/">
+        </link>
+        <updated>2023-01-06T14:06:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>一下子好像突然想起什么，一寸一寸叠起来的小房间里我仰着头。我阳了，发烧的挺厉害，我还是坚持坐在桌前，我抬着头，我想着昨天，昨天的昨天，昨天的昨天的，昨天。<br>
+嘶，我好像刚开学来着？</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一下子好像突然想起什么，一寸一寸叠起来的小房间里我仰着头。我阳了，发烧的挺厉害，我还是坚持坐在桌前，我抬着头，我想着昨天，昨天的昨天，昨天的昨天的，昨天。<br>
+嘶，我好像刚开学来着？</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Node + Ts + Mongodb 增删改查封装]]></title>
+        <id>https://pluginskers.github.io/post/typescript-and-mongodb/</id>
+        <link href="https://pluginskers.github.io/post/typescript-and-mongodb/">
+        </link>
+        <updated>2022-12-07T15:00:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>俗言有道，自奉必减几分方好，处世能退一步为高。<br>
+之前有很多的前后端开发，数据库其实是一个项目运行的必须的一环，也是很重要的一环。<br>
+数据库千千万，合适的到底有哪些？</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>俗言有道，自奉必减几分方好，处世能退一步为高。<br>
+之前有很多的前后端开发，数据库其实是一个项目运行的必须的一环，也是很重要的一环。<br>
+数据库千千万，合适的到底有哪些？</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Typescript & Javascript 开发小记 写一个简单的沙箱]]></title>
+        <id>https://pluginskers.github.io/post/typescript-javascript-sandbox./</id>
+        <link href="https://pluginskers.github.io/post/typescript-javascript-sandbox./">
+        </link>
+        <updated>2022-10-23T02:41:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>深拷贝和浅拷贝是 JS 基础，很多人（包括我）可能理解两者的区别。<br>
+还有记录一下近期开发沙盒的过程。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>深拷贝和浅拷贝是 JS 基础，很多人（包括我）可能理解两者的区别。<br>
+还有记录一下近期开发沙盒的过程。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我的cpp的算法学习笔记]]></title>
+        <id>https://pluginskers.github.io/post/learning-c-programming/</id>
+        <link href="https://pluginskers.github.io/post/learning-c-programming/">
+        </link>
+        <updated>2022-09-22T03:55:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>来自大学课程的一封启示。</p>
+<p>在专攻硬件这条路上算是越走越远了啊，硬件会不会要走得更远一点？因为要接触底层，那么更需要学会一些强类型的语言。C，我来了</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>来自大学课程的一封启示。</p>
+<p>在专攻硬件这条路上算是越走越远了啊，硬件会不会要走得更远一点？因为要接触底层，那么更需要学会一些强类型的语言。C，我来了</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[都在说这个，那我也来聊聊微信键盘]]></title>
+        <id>https://pluginskers.github.io/post/wechat-inputer/</id>
+        <link href="https://pluginskers.github.io/post/wechat-inputer/">
+        </link>
+        <updated>2022-09-06T15:51:12.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>发布时间2022-09-06 23:51:12。<br>
+本文具有一定的时效性。</p>
+</blockquote>
+<p>最近「微信键盘」开启了内测，我看到挺多网友讨论的，于是前几天下载下来尝试了一下，今天也来跟大家分享一下使用体验。</p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>发布时间2022-09-06 23:51:12。<br>
+本文具有一定的时效性。</p>
+</blockquote>
+<p>最近「微信键盘」开启了内测，我看到挺多网友讨论的，于是前几天下载下来尝试了一下，今天也来跟大家分享一下使用体验。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Vue实现的新拟态设计亲戚关系计算器]]></title>
+        <id>https://pluginskers.github.io/post/kinship-calculator-proj/</id>
+        <link href="https://pluginskers.github.io/post/kinship-calculator-proj/">
+        </link>
+        <updated>2022-08-19T10:47:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>它，只是一个计算器。但是，使用了新拟态的样式设计。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>它，只是一个计算器。但是，使用了新拟态的样式设计。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Xposed 新时代要来了，project mainline]]></title>
+        <id>https://pluginskers.github.io/post/guide-to-android-xposed/</id>
+        <link href="https://pluginskers.github.io/post/guide-to-android-xposed/">
+        </link>
+        <updated>2022-08-18T11:43:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>我们知道，原版Xposed框架(rovo89写的那个)</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>我们知道，原版Xposed框架(rovo89写的那个)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[不会鉴权不行啊，通过Github理解鉴权]]></title>
+        <id>https://pluginskers.github.io/post/understanding-github-authentication/</id>
+        <link href="https://pluginskers.github.io/post/understanding-github-authentication/">
+        </link>
+        <updated>2022-07-19T10:49:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>因为最近的一些需求，我不得不对鉴权反复翻检。如是</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>因为最近的一些需求，我不得不对鉴权反复翻检。如是</p>
+]]></content>
+    </entry>
+</feed>

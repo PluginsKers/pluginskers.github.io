@@ -1,0 +1,184 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Xposed 新时代要来了，project mainline | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Xposed 新时代要来了，project mainline | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="我们知道，原版Xposed框架(rovo89写的那个)
+
+在ART运行时上的实现方式是，用AOSP的代码，将ART部分进行魔改加入xposed方法的执行逻辑。
+这种方法技术上行得通的原因在于Android系统对libartso的要求就是实现..." />
+    <meta name="keywords" content="android,xposed" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Xposed 新时代要来了，project mainline
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-08-18
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/NE2kCNzQ3Q/" class="post-tag">
+                  # android
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/DRKvQZMx9N/" class="post-tag">
+                  # xposed
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>我们知道，原版Xposed框架(rovo89写的那个)</p>
+<!-- more -->
+<p>在ART运行时上的实现方式是，用AOSP的代码，将ART部分进行魔改加入xposed方法的执行逻辑。<br>
+这种方法技术上行得通的原因在于Android系统对libartso的要求就是实现三个方法(主要是JNICreateJavaVM)。<br>
+然而，原版Xposed框架在80系统难产在90停更，技术上很大的原因在于ART越来越复杂，不仅要修改libart.so还要改dex2oatlibjit-compiler.so等一堆东西...导致维护起来基本上就失控了。<br>
+但ARTapex的出现似乎让这玩意出现了转机。<br>
+Google 在 Android 10 上引入了 project mainline 很多模块都独立成了可单独安装的apex，其中就包含runtime，Android 11更进一步，ART被完全独立了。<br>
+因此，原版Xposed的那种，用AOSP魔改一个ART来替换官方ART似乎又成为了一个非常好的选择，<br>
+因为，安装一个apex就和安装一个apk一样简单!</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/understanding-github-authentication/">
+              <h3 class="post-title">
+                不会鉴权不行啊，通过Github理解鉴权
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

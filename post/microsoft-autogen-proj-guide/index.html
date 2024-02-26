@@ -1,0 +1,345 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>尝试本地部署microsoft/autogen项目 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="尝试本地部署microsoft/autogen项目 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="看到官方的概述的时候有点惊讶到了，这更像是LLM分布式集群的感觉，一个Agent下发任务给到多个Agent，但是同以往不一样的是，每一层级的Agent都是能够双相通信，这样的话我前面说到的“层级”其实就是不准确了，它更像是平级的团队。
+
+简..." />
+    <meta name="keywords" content="人工智能,ChatGPT,AutoGen,python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              尝试本地部署microsoft/autogen项目
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-10-19
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/uSKDD_1DX/" class="post-tag">
+                  # 人工智能
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/abODkExRIs/" class="post-tag">
+                  # ChatGPT
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/hTTjO9cyUK/" class="post-tag">
+                  # AutoGen
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/iNECIsxDPWY/" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>看到官方的概述的时候有点惊讶到了，这更像是LLM分布式集群的感觉，一个Agent下发任务给到多个Agent，但是同以往不一样的是，每一层级的Agent都是能够双相通信，这样的话我前面说到的“层级”其实就是不准确了，它更像是平级的团队。</p>
+<!-- more -->
+<h2 id="简单说一下这个项目">简单说一下这个项目</h2>
+<p>项目地址：<a href="https://github.com/microsoft/autogen">microsoft/autogen</a></p>
+<p>项目README的概述：</p>
+<blockquote>
+<p>这个项目是FLAML的一个分支。</p>
+<p>autogen已经从FLAML毕业，成为一个新的项目。</p>
+<p>AutoGen是一个框架，它可以使用多个可以相互对话来解决任务的智能体来开发LLM应用。AutoGen智能体是可定制的，可对话的，并且无缝地允许人类参与。它们可以在使用LLM、人类输入和工具的各种模式下运行。</p>
+<p>AutoGen使得用最小的努力构建下一代LLM应用成为可能。它简化了复杂LLM工作流的编排、自动化和优化。它最大化了LLM模型的性能，并克服了它们的弱点。</p>
+<p>它支持复杂工作流的多种对话模式。通过可定制和可对话的智能体，开发者可以使用AutoGen构建多种对话模式，涉及对话自主性、智能体数量和&gt; 智能体对话拓扑。</p>
+<p>它提供了一系列具有不同复杂度的工作系统。这些系统涵盖了各个领域和复杂度的广泛应用。这展示了AutoGen如何轻松地支持多种对话模式。</p>
+<p>AutoGen提供了一个替代openai.Completion或openai.ChatCompletion的增强推理API。它允许轻松地进行性能调优、实用工具（如API统一和&gt; 缓存）和高级使用模式（如错误处理、多配置推理、上下文编程等）。</p>
+<p>AutoGen是由微软、宾夕法尼亚州立大学和华盛顿大学的合作研究项目提供支持的。</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019125906.png" alt="20231019125906" loading="lazy"></figure>
+<p>然后查阅官方给到的文档去使用本地模型完成部署 <a href="https://microsoft.github.io/autogen/blog/2023/07/14/Local-LLMs/">文档地址</a></p>
+<h2 id="本地部署">本地部署</h2>
+<p>原文：</p>
+<blockquote>
+<h3 id="clone-fastchat">Clone FastChat​</h3>
+<p>FastChat provides OpenAI-compatible APIs for its supported models, so you can use FastChat as a local drop-in replacement for OpenAI APIs. However, its code needs minor modification in order to function properly.</p>
+<pre><code class="language-bash">git clone https://github.com/lm-sys/FastChat.git
+cd FastChat
+</code></pre>
+<h3 id="download-checkpoint">Download checkpoint​</h3>
+<p>ChatGLM-6B is an open bilingual language model based on General Language Model (GLM) framework, with 6.2 billion &gt; parameters. ChatGLM2-6B is its second-generation version.</p>
+<p>Before downloading from HuggingFace Hub, you need to have Git LFS installed.</p>
+<pre><code class="language-bashl">git clone https://huggingface.co/THUDM/chatglm2-6b
+</code></pre>
+<h3 id="initiate-server">Initiate server</h3>
+<p>First, launch the controller</p>
+<pre><code class="language-bashl">python -m fastchat.serve.controller
+</code></pre>
+<p>Then, launch the model worker(s)</p>
+<pre><code class="language-bashl">python -m fastchat.serve.model_worker --model-path chatglm2-6b
+</code></pre>
+<p>Finally, launch the RESTful API server</p>
+<pre><code class="language-bashl">python -m fastchat.serve.openai_api_server --host localhost --port 8000
+</code></pre>
+<p>Normally this will work. However, if you encounter error like this, commenting out all the lines containing &gt; <code>finish_reason</code> in <code>fastchat/protocol/api_protocal.py</code> and <code>fastchat/protocol/openai_api_protocol.py</code> will fix the &gt; problem. The modified code looks like:</p>
+<pre><code class="language-python">class CompletionResponseChoice(BaseModel):
+    index: int
+    text: str
+    logprobs: Optional[int] = None
+    # finish_reason: Optional[Literal[&quot;stop&quot;, &quot;length&quot;]]
+
+class CompletionResponseStreamChoice(BaseModel):
+    index: int
+    text: str
+    logprobs: Optional[float] = None
+    # finish_reason: Optional[Literal[&quot;stop&quot;, &quot;length&quot;]] = None
+</code></pre>
+<h3 id="interact-with-model-using-oaicompletion">Interact with model using oai.Completion</h3>
+<p>Now the models can be directly accessed through openai-python library as well as <code>autogen.oai.Completion</code> and <code>autogen.oai.ChatCompletion</code>.</p>
+<pre><code class="language-python">from autogen import oai
+
+# create a text completion request
+response = oai.Completion.create(
+    config_list=[
+        {
+            &quot;model&quot;: &quot;chatglm2-6b&quot;,
+            &quot;api_base&quot;: &quot;http://localhost:8000/v1&quot;,
+            &quot;api_type&quot;: &quot;open_ai&quot;,
+            &quot;api_key&quot;: &quot;NULL&quot;, # just a placeholder
+        }
+    ],
+    prompt=&quot;Hi&quot;,
+)
+print(response)
+
+# create a chat completion request
+response = oai.ChatCompletion.create(
+    config_list=[
+        {
+            &quot;model&quot;: &quot;chatglm2-6b&quot;,
+            &quot;api_base&quot;: &quot;http://localhost:8000/v1&quot;,
+            &quot;api_type&quot;: &quot;open_ai&quot;,
+            &quot;api_key&quot;: &quot;NULL&quot;,
+        }
+    ],
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hi&quot;}]
+)
+print(response)
+</code></pre>
+<p>If you would like to switch to different models, download their checkpoints and specify model path when launching model worker(s).</p>
+<h3 id="interacting-with-multiple-local-llms">interacting with multiple local LLMs​</h3>
+<p>If you would like to interact with multiple LLMs on your local machine, replace the model_worker step above with a multi model variant:</p>
+<pre><code class="language-bash">python -m fastchat.serve.multi_model_worker \
+    --model-path lmsys/vicuna-7b-v1.3 \
+    --model-names vicuna-7b-v1.3 \
+    --model-path chatglm2-6b \
+    --model-names chatglm2-6b
+</code></pre>
+<p>The inference code would be:</p>
+<pre><code class="language-python">from autogen import oai
+
+# create a chat completion request
+response = oai.ChatCompletion.create(
+    config_list=[
+        {
+            &quot;model&quot;: &quot;chatglm2-6b&quot;,
+            &quot;api_base&quot;: &quot;http://localhost:8000/v1&quot;,
+            &quot;api_type&quot;: &quot;open_ai&quot;,
+            &quot;api_key&quot;: &quot;NULL&quot;,
+        },
+        {
+            &quot;model&quot;: &quot;vicuna-7b-v1.3&quot;,
+            &quot;api_base&quot;: &quot;http://localhost:8000/v1&quot;,
+            &quot;api_type&quot;: &quot;open_ai&quot;,
+            &quot;api_key&quot;: &quot;NULL&quot;,
+        }
+    ],
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hi&quot;}]
+)
+print(response)
+</code></pre>
+</blockquote>
+<p>总结一下其实就是将<code>chatglm2</code>开放为一个接口提供给<strong>AutoGen</strong>调用，同理将模型封装为API都能提供给<strong>AutoGen</strong>调用。</p>
+<h2 id="实践出真知">实践出真知</h2>
+<h3 id="安装fastchat">安装<code>fastchat</code></h3>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019131637.png" alt="20231019131637" loading="lazy"></figure>
+<h3 id="安装serve库">安装<code>serve</code>库</h3>
+<figure data-type="image" tabindex="3"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019131730.png" alt="20231019131730" loading="lazy"></figure>
+<h3 id="然后启动本地的llm模型">然后启动本地的LLM模型</h3>
+<p>因为我的模型路径为 <code>/home/kers/lab/transformers/models/THUDM/chatglm2-6b/</code>，所以启动命令如下：</p>
+<pre><code class="language-bash">python -m fastchat.serve.model_worker --model-path /home/kers/lab/transformers/models/THUDM/chatglm2-6b/
+</code></pre>
+<h4 id="出现问题">出现问题</h4>
+<figure data-type="image" tabindex="4"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019132416.png" alt="20231019132416" loading="lazy"></figure>
+<p>报了一个错误：<code>RuntimeError: The NVIDIA driver on your system is too old (found version 11020). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver.</code><br>
+意思就是我的 <code>CUDA</code> 版本太老了，图中我是用 <code>nvidia-smi</code> 输出了相关信息，能看到我的版本是 <strong>11.2</strong> 那么我们更新驱动。</p>
+<figure data-type="image" tabindex="5"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019132554.png" alt="20231019132554" loading="lazy"></figure>
+<p>这个驱动的版本是 <strong>12.2</strong> 目前的最新版本。</p>
+<figure data-type="image" tabindex="6"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20231019140738.png" alt="20231019140738" loading="lazy"></figure>
+<p>更新完成了，</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%AE%80%E5%8D%95%E8%AF%B4%E4%B8%80%E4%B8%8B%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE">简单说一下这个项目</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2">本地部署</a>
+<ul>
+<li><a href="#clone-fastchat">Clone FastChat​</a></li>
+<li><a href="#download-checkpoint">Download checkpoint​</a></li>
+<li><a href="#initiate-server">Initiate server</a></li>
+<li><a href="#interact-with-model-using-oaicompletion">Interact with model using oai.Completion</a></li>
+<li><a href="#interacting-with-multiple-local-llms">interacting with multiple local LLMs​</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E8%B7%B5%E5%87%BA%E7%9C%9F%E7%9F%A5">实践出真知</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85fastchat">安装<code>fastchat</code></a></li>
+<li><a href="#%E5%AE%89%E8%A3%85serve%E5%BA%93">安装<code>serve</code>库</a></li>
+<li><a href="#%E7%84%B6%E5%90%8E%E5%90%AF%E5%8A%A8%E6%9C%AC%E5%9C%B0%E7%9A%84llm%E6%A8%A1%E5%9E%8B">然后启动本地的LLM模型</a>
+<ul>
+<li><a href="#%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98">出现问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/artificial-intelligence/">
+              <h3 class="post-title">
+                谈谈ChatGPT和现在的LLM大语言模型
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

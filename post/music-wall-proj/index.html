@@ -1,0 +1,309 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>网易云热评墙 | MusicWall 项目介绍 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="网易云热评墙 | MusicWall 项目介绍 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+这个故事还没有结束，使用Vue.js开发的流式程式。
+
+项目介绍
+继我于2019开发的项目 NeteaseCloudHotReview 网易云热评墙
+看到了很多人的故事，想着是否能将其收拢，归档一下，随后而突发奇想。
+便做出了这样的一个小..." />
+    <meta name="keywords" content="webpack,js,vue" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              网易云热评墙 | MusicWall 项目介绍
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-04-06
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/u0H0mIJyme/" class="post-tag">
+                  # webpack
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/WMacPfuqo1/" class="post-tag">
+                  # js
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/K3C3EVE4Jqu/" class="post-tag">
+                  # vue
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427203907.png" alt="cover" loading="lazy"></figure>
+<p>这个故事还没有结束，使用Vue.js开发的流式程式。</p>
+<!--more-->
+<h2 id="项目介绍">项目介绍</h2>
+<p>继我于2019开发的项目 NeteaseCloudHotReview 网易云热评墙<br>
+看到了很多人的故事，想着是否能将其收拢，归档一下，随后而突发奇想。<br>
+便做出了这样的一个小玩意。</p>
+<h2 id="踩坑记录">踩坑记录</h2>
+<h3 id="swiper-我是真没想到这么大一个锅在你身上">Swiper 我是真没想到这么大一个锅在你身上</h3>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427202349.png" alt="bug" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427202353.png" alt="bug" loading="lazy"></figure>
+<p>谁知道我卸载安装了多少遍</p>
+<p>报错都类似这样：</p>
+<pre><code class="language-bash">warning  in ./node_modules/_swiper@6.5.0@swiper/esm/vue/swiper.js
+638:10-11 &quot;export 'h' was not found in 'vue'
+warning  in ./node_modules/_swiper@6.5.0@swiper/esm/vue/swiper-slide.js
+66:13-14 &quot;export 'h' was not found in 'vue'
+warning  in ./node_modules/_swiper@6.5.0@swiper/esm/vue/swiper-slide.js
+70:22-23 &quot;export 'h' was not found in 'vue'
+</code></pre>
+<ul>
+<li>更换低版本的Swiper</li>
+<li>修改createVue为链式创建</li>
+</ul>
+<h3 id="axios没办法post请求">axios没办法post请求</h3>
+<p>关于 axios POST请求无法正确传值</p>
+<p>axios 默认发送数据时，数据格式是 Request Payload，并非我们常用的 Form Data 格式，所以参数必须要以键值对形式传递，不能以json形式传参</p>
+<p>那么很显然，需要更改一下他的形式</p>
+<p>通过官方文档可得到在创建axios实例的时候有一个参数 transformRequest 可以达到预期</p>
+<pre><code class="language-js">transformRequest: [
+  data =&gt; {
+    let params = '';
+    for (var index in data) {
+      params += index + '=' + data[index] + '&amp;';
+    }
+    return params;
+  }
+]
+</code></pre>
+<h2 id="开发小结">开发小结</h2>
+<h3 id="100">1.0.0</h3>
+<ul>
+<li>热评墙页面</li>
+<li>热评墙播放器</li>
+<li>相关逻辑</li>
+</ul>
+<h3 id="101">1.0.1</h3>
+<ul>
+<li>
+<p>双击评论点赞</p>
+</li>
+<li>
+<p>发布</p>
+</li>
+</ul>
+<h3 id="102">1.0.2</h3>
+<ul>
+<li>登录信息缓存</li>
+</ul>
+<h3 id="103">1.0.3</h3>
+<ul>
+<li>首个完整稳定 完美 的版本发布</li>
+</ul>
+<h3 id="104">1.0.4</h3>
+<ul>
+<li>更新了点赞的相关逻辑，以及页面样式</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210717152257.png" alt="点赞时的背景动画" loading="lazy"></figure>
+<ul>
+<li>修复了在接口调用上跨域等问题</li>
+<li>更新帮助页面</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210717152151.png" alt="帮助" loading="lazy"></figure>
+<ul>
+<li>
+<p>相关协议 The MIT License (MIT)</p>
+</li>
+<li>
+<p>取消收藏歌曲</p>
+</li>
+<li>
+<p>退出登录</p>
+</li>
+<li>
+<p>Beta 签到/云贝任务方案</p>
+</li>
+<li>
+<p>修复歌曲播放BUG</p>
+</li>
+</ul>
+<h3 id="105beta">1.0.5Beta</h3>
+<ul>
+<li>修复了播放器BUG</li>
+<li>更新 二维码 登录</li>
+</ul>
+<h3 id="105">1.0.5</h3>
+<ul>
+<li>更新帮助页面逻辑</li>
+<li>修复播放器，图标显示问题</li>
+</ul>
+<h2 id="其他">其他</h2>
+<p><a href="https://mw.i5res.com/">网易云热评墙 这个故事还没有结束！</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D">项目介绍</a></li>
+<li><a href="#%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95">踩坑记录</a>
+<ul>
+<li><a href="#swiper-%E6%88%91%E6%98%AF%E7%9C%9F%E6%B2%A1%E6%83%B3%E5%88%B0%E8%BF%99%E4%B9%88%E5%A4%A7%E4%B8%80%E4%B8%AA%E9%94%85%E5%9C%A8%E4%BD%A0%E8%BA%AB%E4%B8%8A">Swiper 我是真没想到这么大一个锅在你身上</a></li>
+<li><a href="#axios%E6%B2%A1%E5%8A%9E%E6%B3%95post%E8%AF%B7%E6%B1%82">axios没办法post请求</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%80%E5%8F%91%E5%B0%8F%E7%BB%93">开发小结</a>
+<ul>
+<li><a href="#100">1.0.0</a></li>
+<li><a href="#101">1.0.1</a></li>
+<li><a href="#102">1.0.2</a></li>
+<li><a href="#103">1.0.3</a></li>
+<li><a href="#104">1.0.4</a></li>
+<li><a href="#105beta">1.0.5Beta</a></li>
+<li><a href="#105">1.0.5</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/minecraft-motd-proj/">
+              <h3 class="post-title">
+                MOTD平台 | Motd Platform（已停止运营）
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

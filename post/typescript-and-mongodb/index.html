@@ -1,0 +1,533 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Node + Ts + Mongodb 增删改查封装 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Node + Ts + Mongodb 增删改查封装 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="俗言有道，自奉必减几分方好，处世能退一步为高。
+之前有很多的前后端开发，数据库其实是一个项目运行的必须的一环，也是很重要的一环。
+数据库千千万，合适的到底有哪些？
+
+数据库有哪些
+跳过废话
+
+关系型数据库
+
+Oracle
+MySQL
+
+
+非..." />
+    <meta name="keywords" content="mongodb,typescript,js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Node + Ts + Mongodb 增删改查封装
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-12-07
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/RosulWu9G/" class="post-tag">
+                  # mongodb
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/h__3FE80yV/" class="post-tag">
+                  # typescript
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/WMacPfuqo1/" class="post-tag">
+                  # js
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>俗言有道，自奉必减几分方好，处世能退一步为高。<br>
+之前有很多的前后端开发，数据库其实是一个项目运行的必须的一环，也是很重要的一环。<br>
+数据库千千万，合适的到底有哪些？</p>
+<!-- more -->
+<h2 id="数据库有哪些">数据库有哪些</h2>
+<p><a href="#DB%E7%B1%BB%E5%B0%81%E8%A3%85">跳过废话</a></p>
+<ul>
+<li>关系型数据库
+<ul>
+<li>Oracle</li>
+<li>MySQL</li>
+</ul>
+</li>
+<li>非关系型数据库
+<ul>
+<li>NoSQL</li>
+</ul>
+</li>
+<li>键值存储数据库（key-value）
+<ul>
+<li>Memcached</li>
+<li>Redis</li>
+<li>MemcacheDB</li>
+</ul>
+</li>
+<li>列存储（Column-oriented）数据库
+<ul>
+<li>Cassandra</li>
+<li>HBase</li>
+</ul>
+</li>
+<li>面向文档（Document-Oriented）数据库
+<ul>
+<li>MongoDB</li>
+<li>CouchDB</li>
+</ul>
+</li>
+<li>图形数据库
+<ul>
+<li>Neo4J</li>
+<li>InforGrid</li>
+</ul>
+</li>
+</ul>
+<h2 id="mongodb">MongoDB</h2>
+<p><a href="https://www.mongodb.com/home">https://www.mongodb.com/home</a></p>
+<p>几句话。</p>
+<p>不管是kv的内存型redies，还是文档型的mongodb，上手都很都很简单，而且，文档型数据库跟json很像啊，那就更容易理解了，再加上性能还凑合，就他了呗，而且还有mongoose这种玩意，写着毫无压力，个把小时就上手了<br>
+敲黑板！时间就是金钱啊，先上了再说玩会了这个流程，是什么数据库不重要，都是store，根据配置切不同实现就完事。至于后面要考虑的存和取的性能和场景，不需要一开始就过度考虑。</p>
+<p>妄论一下。</p>
+<p>1.Node在io并发处理比较擅长，mongodb也是擅长读写的，两者这方面很契合，mongodb在大数据方面也比较擅长。<br>
+2.mongodb是文档数据，数据结构是bson，也可以说是json，而众所周知json是来源于JavaScript object，nodejs又是以<strong>js</strong>为编程语言。</p>
+<h3 id="js为底层语言">Js为底层语言</h3>
+<p>很直观的体现了，在进入Mongo时，执行<code>1 + 1</code>会返回<code>2</code>，dddd</p>
+<p>看到这里，其实也跃跃欲试了，如何像博主一样花费30分钟就可以玩得转它？</p>
+<p>我知道你很急，但是你先别急。</p>
+<h3 id="安装流程">安装流程</h3>
+<p>很保姆级了，往下看。</p>
+<p>下载。</p>
+<p>安装。</p>
+<p>无需配置环境变量。</p>
+<p>能理解到这一步，其实对shell这类，还有系统这类有一定认识了，mongo.exe其实就是一个cmd程序。</p>
+<p>我的bin文件夹</p>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221207231825.png" alt="pic" loading="lazy"></figure>
+<p>打开目录下的终端，这里不管是cmd还是terminal都可以</p>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221207231909.png" alt="pic" loading="lazy"></figure>
+<p>先别急着一步步操作，看教程是为了学会，请耐心通读本段落</p>
+<p><strong>mongod.exe</strong>是创建mongodb的进程，也就是打开数据库的程序</p>
+<p>我在<strong>D:/<strong>创建了文件夹</strong>Databases/Mongodb</strong></p>
+<p><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221207232710.png" alt="pic" loading="lazy"><br>
+<img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221207232728.png" alt="pic" loading="lazy"></p>
+<p>刚创建文件夹肯定不会像我一样有文件。。。</p>
+<pre><code class="language-bash">mongod.exe --dbpath &quot;D:/Databases/Mongodb/&quot;
+</code></pre>
+<p>执行完后，你会发现你的文件夹里面生成了文件。</p>
+<p>然后，<br>
+打开数据库。。。</p>
+<p><strong>mongosh.exe</strong>是一个可以操作mongodb的命令行程序</p>
+<pre><code class="language-bash">mongosh.exe
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221207232618.png" alt="pic" loading="lazy"></figure>
+<p>到这里，你拥有了一个<strong>Mongodb</strong>数据库。</p>
+<h3 id="使用方法">使用方法</h3>
+<p>创建数据库</p>
+<p>尝试使用一个自定义的数据库：</p>
+<pre><code class="language-js">&gt; use test_db
+switched to db test_db
+&gt; db
+test_db
+&gt;
+</code></pre>
+<pre><code class="language-js">&gt; show dbs
+admin    40.00 KiB
+config   72.00 KiB
+local    72.00 KiB
+test_db   8.00 KiB
+&gt;
+</code></pre>
+<p>“为什么我use的test_db不在里面？”</p>
+<pre><code class="language-js">&gt; db.test_db.insert({&quot;name&quot;:&quot;测试&quot;})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId(&quot;63917571c6696a553b3fc68c&quot;) }
+}
+&gt; show dbs
+admin    40.00 KiB
+config   72.00 KiB
+local    72.00 KiB
+test_db   8.00 KiB
+&gt;
+</code></pre>
+<p>出现了。<br>
+在这一步，Mongodb会在你插入数据的时候自动创建数据库。（很方便）</p>
+<h4 id="删除数据库">删除数据库</h4>
+<pre><code class="language-js">&gt; db.dropDatabase()
+{ ok: 1, dropped: 'test_db' }
+&gt;
+</code></pre>
+<h4 id="集合">集合</h4>
+<h4 id="列出">列出</h4>
+<pre><code class="language-js">show collections
+</code></pre>
+<h4 id="创建">创建</h4>
+<pre><code class="language-js">db.createCollection(name, options)
+</code></pre>
+<p>options</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>capped</td>
+<td>布尔</td>
+<td>（可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。当该值为 true 时，必须指定 size 参数。</td>
+</tr>
+<tr>
+<td>autoIndexId</td>
+<td>布尔</td>
+<td>3.2 之后不再支持该参数。（可选）如为 true，自动在 _id 字段创建索引。默认为 false。</td>
+</tr>
+<tr>
+<td>size</td>
+<td>数值</td>
+<td>（可选）为固定集合指定一个最大值，即字节数。如果 capped 为 true，也需要指定该字段。</td>
+</tr>
+<tr>
+<td>max</td>
+<td>数值</td>
+<td>（可选）指定固定集合中包含文档的最大数量。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="删除">删除</h4>
+<pre><code class="language-js">db.collection.drop()
+</code></pre>
+<h4 id="文档">文档</h4>
+<p>于集合下的一个子函数，可以理解为集合的下一级，而文档内存储的就是业务逻辑中的主要内容</p>
+<h4 id="插入">插入</h4>
+<p>{% codeblock lang:js %}<br>
+db.COLLECTION_NAME.insert(document)<br>
+或<br>
+db.COLLECTION_NAME.save(document)<br>
+{% endcodeblock %}</p>
+<p>更新</p>
+<p>{% codeblock lang:js %}<br>
+db.collection.update(<br>
+<query>,<br>
+<update>,<br>
+{<br>
+upsert: <boolean>,<br>
+multi: <boolean>,<br>
+writeConcern: <document><br>
+}<br>
+)<br>
+{% endcodeblock %}</p>
+<h2 id="db类封装">DB类封装</h2>
+<p>{% codeblock lang:ts %}<br>
+import * as mongodb from 'mongodb';<br>
+import { DBI } from './interfaces';</p>
+<p>export class Db implements DBI {<br>
+public client: mongodb.MongoClient | undefined;<br>
+public db: mongodb.Db | undefined;</p>
+<pre><code>static instance: Db | null;
+
+static getInstance() {
+    if (!Db.instance) throw &quot;No Event!&quot;
+    return this.instance;
+}
+
+constructor(DB_CONN_STRING: string, DB_NAME: string) {
+    this.connection(DB_CONN_STRING, DB_NAME);
+}
+
+/**
+ * 插入数据
+ * @param collectionName 集合名称
+ * @param doc 内容
+ * @returns 
+ */
+public insert&lt;T = mongodb.Document&gt;(collectionName: string, doc: mongodb.OptionalId&lt;T&gt;): Promise&lt;mongodb.InsertOneResult&lt;mongodb.Document&gt;&gt; {
+    return new Promise&lt;mongodb.InsertOneResult&lt;mongodb.Document&gt;&gt;(async (resolve, reject) =&gt; {
+        try {
+            this.db?.collection(collectionName).insertOne(doc).then(resolve).catch(err =&gt; {
+                throw err;
+            });
+        } catch (err) {
+            reject(false);
+        }
+    });
+}
+
+/**
+ * 插入多数据
+ * @param collectionName 集合名称
+ * @param docs[] 内容数组
+ * @returns 
+ */
+public insertMany&lt;T = mongodb.Document&gt;(collectionName: string, docs: mongodb.OptionalId&lt;T&gt;[]): Promise&lt;mongodb.InsertManyResult&lt;mongodb.Document&gt;&gt; {
+    return new Promise&lt;mongodb.InsertManyResult&lt;mongodb.Document&gt;&gt;(async (resolve, reject) =&gt; {
+        try {
+            this.db?.collection(collectionName).insertMany(docs).then(resolve).catch(err =&gt; {
+                throw err;
+            });
+        } catch (err) {
+            reject(false);
+        }
+    });
+}
+
+public delete&lt;T = mongodb.Document&gt;(collectionName: string, filter: mongodb.Filter&lt;T&gt;): Promise&lt;mongodb.DeleteResult&gt; {
+    return new Promise&lt;mongodb.DeleteResult&gt;(async (resolve, reject) =&gt; {
+        try {
+            this.db?.collection(collectionName).deleteOne(filter).then(resolve).catch(err =&gt; {
+                throw err;
+            });
+        } catch (err) {
+            reject(false);
+        }
+    }).catch(err =&gt; {
+        return err;
+    });
+}
+
+public deleteMany&lt;T = mongodb.Document&gt;(collectionName: string, filter: mongodb.Filter&lt;T&gt;): Promise&lt;mongodb.DeleteResult&gt; {
+    return new Promise&lt;mongodb.DeleteResult&gt;(async (resolve, reject) =&gt; {
+        try {
+            this.db?.collection(collectionName).deleteMany(filter).then(resolve).catch(err =&gt; {
+                throw err;
+            });
+        } catch (err) {
+            reject(false);
+        }
+    }).catch(err =&gt; {
+        return err;
+    });
+}
+
+public update&lt;T = mongodb.Document&gt;(collectionName: string, filter: mongodb.Filter&lt;T&gt;, update: mongodb.UpdateFilter&lt;T&gt;): Promise&lt;mongodb.UpdateResult&gt; {
+    return new Promise&lt;mongodb.UpdateResult&gt;(async (resolve, reject) =&gt; {
+        try {
+            this.db?.collection(collectionName).updateOne(filter, update).then(resolve).catch(err =&gt; {
+                throw err;
+            });
+        } catch (err) {
+            reject(false);
+        }
+    }).catch(err =&gt; {
+        return err;
+    });
+}
+
+public find&lt;T = mongodb.Document&gt;(collectionName: string, filter: mongodb.Filter&lt;T&gt;): Promise&lt;any[]&gt; {
+    return new Promise&lt;any&gt;(async (resolve, reject) =&gt; {
+        try {
+            resolve(this.db?.collection(collectionName).find(filter));
+        } catch (err) {
+            reject(false);
+        }
+    }).catch(err =&gt; {
+        return err;
+    });
+}
+
+public aggregate(_collectionName: string, _pipeline: object[]): Promise&lt;any[]&gt; {
+    throw new Error('Method not implemented.');
+}
+
+private connection(DB_CONN_STRING: string, DB_NAME: string): Promise&lt;mongodb.MongoClient&gt; {
+    return new Promise&lt;mongodb.MongoClient&gt;(async (resolve, reject) =&gt; {
+        try {
+            if (!this.client) {
+
+                const client: mongodb.MongoClient = new mongodb.MongoClient(DB_CONN_STRING);
+                await client.connect();
+                this.db = client.db(DB_NAME);
+                this.client = client;
+                console.log(&quot;[Mongodb] class inited.&quot;);
+            }
+            resolve(this.client);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+</code></pre>
+<p>}<br>
+{% endcodeblock %}</p>
+<h2 id="js-sdk引入">JS-SDK引入</h2>
+<figure data-type="image" tabindex="4"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/ts_mongodb-2023-01-08-23-26-42.png" alt="ts_mongodb-2023-01-08-23-26-42" loading="lazy"></figure>
+<p>emmmmmm内心复杂。<br>
+照理来说微信不该对组件编程陌生，这里居然还用半嵌入式页面开发。<br>
+既来之，则安之，我把它转为对象引入到项目，这部分有很多大佬都做了，因为没什么技术门槛。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%89%E5%93%AA%E4%BA%9B">数据库有哪些</a></li>
+<li><a href="#mongodb">MongoDB</a>
+<ul>
+<li><a href="#js%E4%B8%BA%E5%BA%95%E5%B1%82%E8%AF%AD%E8%A8%80">Js为底层语言</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B">安装流程</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</a>
+<ul>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93">删除数据库</a></li>
+<li><a href="#%E9%9B%86%E5%90%88">集合</a></li>
+<li><a href="#%E5%88%97%E5%87%BA">列出</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA">创建</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4">删除</a></li>
+<li><a href="#%E6%96%87%E6%A1%A3">文档</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5">插入</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#db%E7%B1%BB%E5%B0%81%E8%A3%85">DB类封装</a></li>
+<li><a href="#js-sdk%E5%BC%95%E5%85%A5">JS-SDK引入</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/typescript-javascript-sandbox./">
+              <h3 class="post-title">
+                Typescript &amp; Javascript 开发小记 写一个简单的沙箱
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

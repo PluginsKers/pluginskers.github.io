@@ -1,0 +1,393 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typescript &amp; Javascript 开发小记 写一个简单的沙箱 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Typescript &amp; Javascript 开发小记 写一个简单的沙箱 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="深拷贝和浅拷贝是 JS 基础，很多人（包括我）可能理解两者的区别。
+还有记录一下近期开发沙盒的过程。
+
+中数组的深拷贝和浅拷贝
+{% codeblock lang:js %}
+// 现在有个数组 list，它里面有“a、b、c”，3 个变量..." />
+    <meta name="keywords" content="typescript,js,沙箱" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Typescript &amp; Javascript 开发小记 写一个简单的沙箱
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-10-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/h__3FE80yV/" class="post-tag">
+                  # typescript
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/WMacPfuqo1/" class="post-tag">
+                  # js
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/NAgRL_b1ah/" class="post-tag">
+                  # 沙箱
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>深拷贝和浅拷贝是 JS 基础，很多人（包括我）可能理解两者的区别。<br>
+还有记录一下近期开发沙盒的过程。</p>
+<!-- more -->
+<h2 id="中数组的深拷贝和浅拷贝">中数组的深拷贝和浅拷贝</h2>
+<p>{% codeblock lang:js %}<br>
+// 现在有个数组 list，它里面有“a、b、c”，3 个变量，如下：<br>
+const a = {<br>
+name: 'a',<br>
+value: 'a'<br>
+};</p>
+<p>const b = 'str';<br>
+let c = 256;</p>
+<p>const list = [a, b, c];<br>
+const listCopy = list;<br>
+const listDeep = _.cloneDeep(list);<br>
+const listClone = _.clone(list);<br>
+list.push('d');<br>
+a.name = 'new a';<br>
+listClone.push('e');<br>
+c = 480;<br>
+listDeep.push('f');<br>
+list[0].value = 'new a';<br>
+list[1] = 'new str';</p>
+<p>console.log('list', list); // ???<br>
+console.log('listCopy', listCopy); // ???<br>
+console.log('listDeep', listDeep); // ???<br>
+console.log('listClone', listClone); // ???<br>
+{% endcodeblock %}</p>
+<h3 id="重要概念">重要概念</h3>
+<ul>
+<li>基本类型：Null、Undefined、Boolean、Number、String、Symbol。</li>
+<li>引用类型：Object、Array、Function、Date 等。</li>
+</ul>
+<p>基本类型和引用类型的区别：基本类型在内存中是直接存储数据的，引用类型则为一个内存地址，通过这个地址可以得到存储的数据。</p>
+<h3 id="结果及注释">结果及注释</h3>
+<p>{% codeblock lang:js %}<br>
+/**</p>
+<ul>
+<li>为方便讲解和学习，引入 lodash 的深拷贝和浅拷贝函数</li>
+<li>以下代码可在浏览器控制台运行<br>
+*/<br>
+const importJS = document.createElement('script');<br>
+importJS.setAttribute(&quot;src&quot;, 'https://fastly.i5res.com/npm/lodash@4.17.21/lodash.min.js');<br>
+document.getElementsByTagName(&quot;head&quot;)[0].appendChild(importJS);</li>
+</ul>
+<p>// 等待 lodash 加载。要在浏览器使用，有什么好的办法吗？<br>
+setTimeout(() =&gt; {<br>
+if (typeof _ === 'function') {<br>
+// 现在有个数组 list，它里面有“a、b、c”，3 个变量，如下：<br>
+const a = {<br>
+name: 'a',<br>
+value: 'a'<br>
+};</p>
+<pre><code>const b = 'str';
+let c = 256;
+
+const list = [a, b, c];
+const listCopy = list; // 引用赋值
+const listDeep = _.cloneDeep(list); // 深拷贝
+const listClone = _.clone(list); // 浅拷贝
+list.push('d'); // list、 listCopy（赋值） 受影响
+a.name = 'new a'; // list、listClone（浅） 和 listCopy（赋值） 受影响
+listClone.push('e'); // listClone（浅）受影响
+c = 480; // 都不受影响
+listDeep.push('f'); // listDeep（深）受影响
+list[0].value = 'new a'; // list、listClone（浅） 和 listCopy（赋值） 受影响
+list[1] = 'new str'; // list、listCopy（赋值） 受影响
+
+console.log('list', list); // [{name: &quot;new a&quot;, value: &quot;new a&quot;}, &quot;new str&quot;, 256, &quot;d&quot;]
+console.log('listCopy', listCopy); // [{name: &quot;new a&quot;, value: &quot;new a&quot;}, &quot;new str&quot;, 256, &quot;d&quot;]
+console.log('listDeep', listDeep); // [{name: &quot;a&quot;, value: &quot;a&quot;}, &quot;str&quot;, 256, &quot;f&quot;]
+console.log('listClone', listClone); // [{name: &quot;new a&quot;, value: &quot;new a&quot;}, &quot;str&quot;, 256, &quot;e&quot;]
+</code></pre>
+<p>}<br>
+}, 1000);<br>
+{% endcodeblock %}</p>
+<h3 id="总结">总结</h3>
+<ol>
+<li>浅拷贝得到的数组，其内引用类型的地址为原来的地址，基本类型没有引用地址，等同于深拷贝。即：浅拷贝后数组中的引用类型跟随原数组变化。</li>
+<li>深拷贝得到的数组，引用类型的地址不为原来的地址，即：其每层引用类型的地址都是新的地址，所有数据变化不与原来的关联。</li>
+<li>引用赋值得到的数组，与原来的数组一致，即：list 和 listCopy 指向同一个地址，可以得到原数组的引用地址内的数据变化。</li>
+</ol>
+<h2 id="沙盒开发">沙盒开发</h2>
+<h3 id="核心功能">核心功能</h3>
+<p>导入模块<code>vm</code>模块</p>
+<p><a href="https://nodejs.org/api/vm.html">官方文档</a></p>
+<h3 id="主要内容">主要内容</h3>
+<h4 id="上下文">上下文</h4>
+<p>这个作为沙盒的运行主体（什么都要往里送）</p>
+<p>context</p>
+<p>{% codeblock lang:js %}<br>
+//把context包装成proxy对象，来捕捉一些操作<br>
+let context = new Proxy(context, {<br>
+set(o, k, v) {<br>
+//...<br>
+return Reflect.set(o, k, v)<br>
+},<br>
+defineProperty: (o, k, d)=&gt;{<br>
+if (<br>
+//权限判断<br>
+)<br>
+return Reflect.defineProperty(o, k, d)<br>
+else<br>
+return false<br>
+},<br>
+preventExtensions: (o)=&gt;{<br>
+return false<br>
+},<br>
+setPrototypeOf: (o, prototype)=&gt;{<br>
+return false<br>
+}<br>
+});<br>
+{% endcodeblock %}</p>
+<h4 id="保护类">保护类</h4>
+<p>Proxy<br>
+Object<br>
+Function<br>
+Array<br>
+...</p>
+<p>{% codeblock lang:js %}<br>
+//冻结内置对象(不包括console,globalThis)<br>
+const internal_properties = [<br>
+'Object',             'Function',       'Array',<br>
+'Number',             'parseFloat',     'parseInt',<br>
+'Boolean',            'String',         'Symbol',<br>
+'Date',               'RegExp',         'eval',<br>
+'Error',              'EvalError',      'RangeError',<br>
+'ReferenceError',     'SyntaxError',    'TypeError',<br>
+'URIError',           'JSON',           'Promise',<br>
+'Math',               'Intl',<br>
+'ArrayBuffer',        'Uint8Array',     'Int8Array',<br>
+'Uint16Array',        'Int16Array',     'Uint32Array',<br>
+'Int32Array',         'Float32Array',   'Float64Array',<br>
+'Uint8ClampedArray',  'BigUint64Array', 'BigInt64Array',<br>
+'DataView',           'Map',            'BigInt',<br>
+'Set',                'WeakMap',        'WeakSet',<br>
+'Proxy',              'Reflect',        'decodeURI',<br>
+'decodeURIComponent', 'encodeURI',      'encodeURIComponent',<br>
+'escape',             'unescape',<br>
+'isFinite',           'isNaN',          'SharedArrayBuffer',<br>
+'Atomics',            'WebAssembly'<br>
+];</p>
+<p>for (let v of internal_properties) {<br>
+vm.runInContext(<code>this.Object.freeze(this.${v}); this.Object.freeze(this.${v}.prototype); const ${v} = this.${v}</code>, context);<br>
+}<br>
+{% endcodeblock %}</p>
+<h4 id="权限类">权限类</h4>
+<p>isMaster()</p>
+<p>{% codeblock lang:js %}<br>
+// SANDBOX_ROOT该环境变量为永久master<br>
+vm.runInContext(<code>Object.defineProperty(this, &quot;root&quot;, {     configurable: false,     enumerable: false,     writable: false,     value: &quot;xxxxxxxx&quot; // 主人的鉴权方式 })</code>, context);<br>
+{% endcodeblock %}</p>
+<h4 id="输入">输入</h4>
+<p>这边是封装了一个exec的函数</p>
+<p>{% codeblock lang:js %}<br>
+//沙盒执行超时时间<br>
+let timeout = 500<br>
+module.exports.getTimeout = (t)=&gt;timeout<br>
+module.exports.setTimeout = (t)=&gt;timeout=t<br>
+{% endcodeblock %}</p>
+<p>{% codeblock lang:js %}<br>
+module.exports.exec = (code) =&gt; {<br>
+return vm.runInContext(code, context, {timeout: timeout})<br>
+}<br>
+{% endcodeblock %}</p>
+<h4 id="输出">输出</h4>
+<p>直接用一个<code>try{}</code>包起来，万事大吉</p>
+<h3 id="道高一尺">道高一尺</h3>
+<p>{% codeblock lang:js %}<br>
+//防止沙盒逃逸<br>
+Function.prototype.view = Function.prototype.toString<br>
+Function.prototype.constructor = new Proxy(Function, {<br>
+apply: ()=&gt;{<br>
+throw Error(&quot;想跟妾身斗，汝还差得远呢。&quot;)<br>
+},<br>
+constructor: ()=&gt;{<br>
+throw Error(&quot;想跟妾身斗，汝还差得远呢。&quot;)<br>
+}<br>
+})<br>
+Object.freeze(Object)<br>
+Object.freeze(Object.prototype)<br>
+Object.freeze(Function)<br>
+Object.freeze(Function.prototype)<br>
+{% endcodeblock %}</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%AD%E6%95%B0%E7%BB%84%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D">中数组的深拷贝和浅拷贝</a>
+<ul>
+<li><a href="#%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5">重要概念</a></li>
+<li><a href="#%E7%BB%93%E6%9E%9C%E5%8F%8A%E6%B3%A8%E9%87%8A">结果及注释</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B2%99%E7%9B%92%E5%BC%80%E5%8F%91">沙盒开发</a>
+<ul>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD">核心功能</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9">主要内容</a>
+<ul>
+<li><a href="#%E4%B8%8A%E4%B8%8B%E6%96%87">上下文</a></li>
+<li><a href="#%E4%BF%9D%E6%8A%A4%E7%B1%BB">保护类</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E7%B1%BB">权限类</a></li>
+<li><a href="#%E8%BE%93%E5%85%A5">输入</a></li>
+<li><a href="#%E8%BE%93%E5%87%BA">输出</a></li>
+</ul>
+</li>
+<li><a href="#%E9%81%93%E9%AB%98%E4%B8%80%E5%B0%BA">道高一尺</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/learning-c-programming/">
+              <h3 class="post-title">
+                我的cpp的算法学习笔记
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

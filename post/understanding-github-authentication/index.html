@@ -1,0 +1,327 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>不会鉴权不行啊，通过Github理解鉴权 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="不会鉴权不行啊，通过Github理解鉴权 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="因为最近的一些需求，我不得不对鉴权反复翻检。如是
+
+我通过了一些简单的例子对OAuth全面理解。其实并不高深，大约10分钟，就可以完全理解它。
+OAuth 2.0
+注册Github OAuth
+最后如图
+
+初步握手，获取Code
+接口地址
+..." />
+    <meta name="keywords" content="oauth,github" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              不会鉴权不行啊，通过Github理解鉴权
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-07-19
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/MnEBD4Ni9B/" class="post-tag">
+                  # oauth
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/o1EiDYQS-j/" class="post-tag">
+                  # github
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>因为最近的一些需求，我不得不对鉴权反复翻检。如是</p>
+<!-- more -->
+<p>我通过了一些简单的例子对OAuth全面理解。其实并不高深，大约10分钟，就可以完全理解它。</p>
+<h2 id="oauth-20">OAuth 2.0</h2>
+<h3 id="注册github-oauth">注册Github OAuth</h3>
+<p>最后如图</p>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2022/202207191854244.png" alt="" loading="lazy"></figure>
+<h3 id="初步握手获取code">初步握手，获取Code</h3>
+<h3 id="接口地址">接口地址</h3>
+<p><code>https://github.com/login/oauth/authorize</code></p>
+<h4 id="请求参数">请求参数</h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>如上图所示，他是鉴别OAuth的</td>
+</tr>
+<tr>
+<td>state</td>
+<td>状态标识，面向第三方，可自定义</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>回调地址，需要和Github中填写的一致</td>
+</tr>
+</tbody>
+</table>
+<h4 id="最后拼接">最后拼接</h4>
+<p><code>https://github.com/login/oauth/authorize?client_id=937bcc8fee696da4dde7&amp;state=1&amp;redirect_uri=https://img.i5res.com/#/login</code></p>
+<h3 id="请求后他能给我些什么">请求后他能给我些什么？</h3>
+<p><code>?code=0dbc9506a2a4a0c1a1c9&amp;state=1</code></p>
+<h3 id="请求鉴权回调返回access_token">请求鉴权回调返回access_token</h3>
+<h4 id="接口地址-2">接口地址</h4>
+<p><code>https://github.com/login/oauth/access_token</code></p>
+<h4 id="请求参数-2">请求参数</h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>如上图所示，他是鉴别OAuth的</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>如上图所示，OAuth的秘钥（高密）</td>
+</tr>
+<tr>
+<td>code</td>
+<td>回调的用户鉴别</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>回调地址</td>
+</tr>
+</tbody>
+</table>
+<h4 id="最后拼接-2">最后拼接</h4>
+<p><code>https://github.com/login/oauth/access_token?client_id=937bcc8fee696da4dde7&amp;client_secret=63b41a1c278b37f348c956785e7d6d1fbc2084d9&amp;code=4f9968079245b9ddbb8a&amp;redirect_uri=https://img.i5res.com/#/login</code></p>
+<h4 id="请求后返回">请求后返回？</h4>
+<pre><code>{    
+  &quot;access_token&quot;:&quot;ACCESS_TOKEN&quot;,
+  &quot;token_type&quot;:&quot;bearer&quot;,
+  &quot;expires_in&quot;:2592000,
+  &quot;refresh_token&quot;:&quot;REFRESH_TOKEN&quot;,
+  &quot;scope&quot;:&quot;read&quot;,
+  &quot;uid&quot;:100101,
+  &quot;info&quot;:{...}
+}
+</code></pre>
+<h3 id="使用github的rset-api进行操作">使用Github的RSET API进行操作</h3>
+<p>具体参见: <a href="https://docs.github.com/en/rest">GitHub's rest API documentation</a></p>
+<p>https://github.com/login/oauth/access_token<br>
+这两个都建议使用<code>GET</code>请求，也可以使用<code>POST</code><br>
+https://api.github.com/user<br>
+需要使用HTTP模拟的<code>GET</code>请求！</p>
+<h3 id="oauth的持续发展">OAuth的持续发展</h3>
+<h4 id="是什么">是什么</h4>
+<p>https://blog.csdn.net/a595077052/article/details/118996218</p>
+<p>OAuth 2.0 是一种开放协议。<br>
+OAuth 2.0 的标准是 RFC 6749 文件。</p>
+<p>举例：我们都在网站或者手机应用中见过 “谷歌登陆” 和 “绑定 Facebook“ 这样的按钮。如果你点击这个按钮，就会有一个窗口弹出并显示“这个应用想要访问你的公共个人主页、通讯录……“，同时它会询问你是否授权。概括而言，这就是 OAuth</p>
+<p>如今过半数的APP都使用到了这一鉴权方式，他相比对OAuth 1.0的安全性有大幅度提升</p>
+<h4 id="发展历程">发展历程</h4>
+<ul>
+<li>2007年发布了OAuthCore 1.0：此版本的协议存在严重的安全漏洞</li>
+<li>2009年6月发布了OAuthCore 1.0 Revision A：修复了前一版本的安全漏洞，并成为RFC5849</li>
+<li>2010年4月发布了OAuth2.0，是OAuth协议的下一版本，但与OAuth 1.0版本互不兼容。</li>
+</ul>
+<p>所以我们现在可以只关注 OAuth2.0</p>
+<p><a href="https://oauth.net/">OAuth core docs: https://oauth.net/</a></p>
+<h2 id="单点登录">单点登录</h2>
+<p>开源项目<a href="https://jwt.io/">jwt</a>有简单的描述。</p>
+<p>很简单的剖析一下，</p>
+<p>一、假设你有很多服务器（集群），你需要一个所有集群都认可的鉴权。</p>
+<p>二、你需要携带这份密钥行进在各页面之间。</p>
+<p>如果解决这两大问题，那么就可以实现了。</p>
+<p><strong>jwt</strong>是目前很多公司的解决方案（包括我的学校）</p>
+<h2 id="其他第三方平台的鉴权方式">其他第三方平台的鉴权方式</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/165077751">Gateway：网关鉴权</a></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#oauth-20">OAuth 2.0</a>
+<ul>
+<li><a href="#%E6%B3%A8%E5%86%8Cgithub-oauth">注册Github OAuth</a></li>
+<li><a href="#%E5%88%9D%E6%AD%A5%E6%8F%A1%E6%89%8B%E8%8E%B7%E5%8F%96code">初步握手，获取Code</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80">接口地址</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0">请求参数</a></li>
+<li><a href="#%E6%9C%80%E5%90%8E%E6%8B%BC%E6%8E%A5">最后拼接</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E5%90%8E%E4%BB%96%E8%83%BD%E7%BB%99%E6%88%91%E4%BA%9B%E4%BB%80%E4%B9%88">请求后他能给我些什么？</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E9%89%B4%E6%9D%83%E5%9B%9E%E8%B0%83%E8%BF%94%E5%9B%9Eaccess_token">请求鉴权回调返回access_token</a>
+<ul>
+<li><a href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-2">接口地址</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-2">请求参数</a></li>
+<li><a href="#%E6%9C%80%E5%90%8E%E6%8B%BC%E6%8E%A5-2">最后拼接</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E5%90%8E%E8%BF%94%E5%9B%9E">请求后返回？</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8github%E7%9A%84rset-api%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C">使用Github的RSET API进行操作</a></li>
+<li><a href="#oauth%E7%9A%84%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95">OAuth的持续发展</a>
+<ul>
+<li><a href="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a></li>
+<li><a href="#%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B">发展历程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95">单点登录</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%89%B4%E6%9D%83%E6%96%B9%E5%BC%8F">其他第三方平台的鉴权方式</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/practical-guide-to-using-puppeteer/">
+              <h3 class="post-title">
+                已完结的Puppeteer学习经验与踩坑
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

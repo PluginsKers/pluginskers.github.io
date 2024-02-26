@@ -1,0 +1,456 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>高阶防御爬虫策略分析 · 浅尝辄止 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="高阶防御爬虫策略分析 · 浅尝辄止 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="0x01爬虫
+防爬虫，就是在尽量减少对正常用户的干扰的情况下尽可能的加大爬虫的成本。
+为何是尽可能加大爬虫成本？
+
+有过网络安全知识基础的或许都知道，网络没有绝对安全，只有相对安全，积极的加强自我的网络安全技术水平有利于网络技术的各个方面。..." />
+    <meta name="keywords" content="爬虫,spider,python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              高阶防御爬虫策略分析 · 浅尝辄止
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-01-11
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/g8F-26Ik0z/" class="post-tag">
+                  # 爬虫
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/ngtewqGIrP/" class="post-tag">
+                  # spider
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/iNECIsxDPWY/" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="0x01爬虫">0x01爬虫</h2>
+<p>防爬虫，就是在尽量减少对正常用户的干扰的情况下尽可能的加大爬虫的成本。<br>
+为何是尽可能加大爬虫成本？</p>
+<!--more-->
+<p>有过网络安全知识基础的或许都知道，网络没有绝对安全，只有相对安全，积极的加强自我的网络安全技术水平有利于网络技术的各个方面。</p>
+<p><strong>举个例子：</strong><br>
+在网络安全下，只有相对安全，一个服务器（组织）不论如何严防死守，在技术更新迭代快速的环境下，漏洞总是无穷无尽，攻击更是防不胜防。</p>
+<p>在互联网与用户数据交互的过程中，有了一个新的成员，爬虫。<br>
+除非产品不是面向用户，否则，就无法阻挡爬虫（无限接近真实用户行为的程序）。Emmm本质很是相似。</p>
+<p>所以，防爬与爬取之间的战斗，比较的是技术门槛！</p>
+<h2 id="0x02防御爬虫">0x02防御爬虫</h2>
+<p>一些不再实用的操作，这里就不多赘述了，网上有很多。</p>
+<h3 id="0x001特征">0x001特征</h3>
+<p>一些关于User-Agent的检测逻辑判断在1202年可能已经不太实用。当然，这里不包含一些浏览器特性（特征） 这个就让爬虫很难受了。<br>
+<strong>比如：</strong></p>
+<pre><code class="language-js">var dstr = &quot;&quot;;
+
+if (navigator.__driver_evaluate) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__webdriver_evaluate) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__selenium_evaluate) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__fxdriver_evaluate) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__driver_unwrapped) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__webdriver_unwrapped) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__selenium_unwrapped) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__fxdriver_unwrapped) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__webdriver_script_func) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.__webdriver_script_fn) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+
+if (navigator.webdriver) {
+    dstr += &quot;1&quot;
+} else {
+    dstr += &quot;0&quot;
+}
+</code></pre>
+<p>另外，如果使用的是Token即时验证，还可以加上鼠标点击事件进行<s>异步</s>二次验证。</p>
+<pre><code class="language-js">// 判断是否在frame框架内
+if (window.self != window.top) {
+    return false;
+} else {
+    return true;
+}
+</code></pre>
+<p>为什么要强调特征？<br>
+谁用谁知道，真香。</p>
+<h3 id="0x002偷梁换柱">0x002偷梁换柱</h3>
+<p>这里可以说是一些骚操作了，首先我们知道：</p>
+<ol>
+<li>在爬取的过程中，是对原始的数据进行抓取分析。</li>
+<li>爬虫没有眼睛。</li>
+<li>程序的等待和人类的等待是有<s>本质</s>区别的（确信）</li>
+</ol>
+<p>那么，如何使自己的程序，不满足以上条件？</p>
+<blockquote>
+<ol>
+<li>原始数据 不等于 最后数据</li>
+<li>原始数据 不等于 最后数据（进阶）只有有屏幕才可以看到</li>
+<li>伪造等待？</li>
+</ol>
+</blockquote>
+<p>我们知道，每一个字符都有一个二进制的Unicode，如果我们将字符的Unicode<s>替换</s>新建，但是字，还是那样。</p>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427201059.png" alt="pic" loading="lazy"></figure>
+<p>由此我们知道“我”的Unicode为 <s>6211</s> <strong>\u6211</strong></p>
+<p>让字在页面中显示依旧，但是改变其Unicode需要借助字体。<br>
+如何更好地理解这个概念？就好像图标一样。</p>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427201105.png" alt="pic" loading="lazy"></figure>
+<p>或者这么想，将“我”与“你”的Unicode调换，那么，用户看到的是“我爱你”。<br>
+而爬虫爬取的源字符串是“你爱我”，从而使其进行错误的下一步。<br>
+通过博主调查折腾得知，要完成这样的操作，通过现有的JS接口和继承关系<strong>无法做到</strong>。<br>
+只能使用“字体文件”来进行修改。<br>
+这里有 <a href="http://fontstore.baidu.com/static/editor/index.html">百度字体编辑</a></p>
+<h3 id="0x003暗渡陈仓">0x003暗渡陈仓</h3>
+<p>我们知道：</p>
+<ol>
+<li>CSS有<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements">伪元素</a>，它有一个必要的“content”的属性</li>
+<li>爬虫对于Style的有着不敏感的接口（这里基本上可以理解为，很难去抓取标签的Style，更何况是伪元素的）</li>
+</ol>
+<p>那么：</p>
+<blockquote>
+<p>使用伪元素（真）来遮盖源（假）数据使用户看到的是真数据<br>
+就能够达到防爬虫的目的</p>
+</blockquote>
+<p><img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427201113.png" alt="pic" loading="lazy"><br>
+<img src="https://fastly.i5res.com/gh/pluginskers/cdn/2021/20210427201121.png" alt="pic" loading="lazy"></p>
+<h2 id="0x03行则将至">0x03行则将至</h2>
+<p>很多实例，其实也带有很多坑，博主踩到过很多。<br>
+主流的防止拦截的短链接网站所用的核心其实就是请求头和响应头的高度耦合，站内还有授权Refer，也足以满足绝大部分防爬需求了。（注意，这里说的并不是所谓的人机验证）</p>
+<p>博主甚至还写过，页面一直pendding，直到css的hover元素被激活（也就是用户“不耐烦的”点击了等待中的页面）才向后端发送请求，效果是出奇的好。<br>
+同理的，博主写过监控页面中的指针动作，如果满足一定的条件，就向后端发送请求，效果也是出奇的好。<br>
+当然，如果使用机器学习，进行行为预测？</p>
+<h3 id="让我们假设">让我们假设</h3>
+<p>假设每秒钟获取用户的指针位置，不存在以0标记，持续10秒，点击位置和次数，任何一切作为客户端能获取到的内容。<br>
+随后，<br>
+我们整理为一个csv文件，它可能像这样：</p>
+<table>
+<thead>
+<tr>
+<th>行为1</th>
+<th>行为2</th>
+<th>行为3</th>
+<th>...</th>
+<th>行为993</th>
+<th>行为994</th>
+<th>行为995</th>
+<th>行为996</th>
+<th>行为997</th>
+<th>行为998</th>
+<th>行为999</th>
+<th>行为1000</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-2</td>
+<td>54-75</td>
+<td>34</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>545</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>3</td>
+<td>人</td>
+</tr>
+<tr>
+<td>1-6</td>
+<td>54-76</td>
+<td>34</td>
+<td>...</td>
+<td>786</td>
+<td>3</td>
+<td>68</td>
+<td>0</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>3</td>
+<td>人</td>
+</tr>
+<tr>
+<td>7-9</td>
+<td>23-43</td>
+<td>34</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>342</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>人</td>
+</tr>
+<tr>
+<td>0-0</td>
+<td>0-0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>爬虫</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>爬虫</td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>...</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>爬虫</td>
+</tr>
+</tbody>
+</table>
+<p>值得注意的是，上面的数据为正常用户的数据收集，这就意味着我们需要针对于爬虫再次收集一次数据，并且都做好标记。</p>
+<p>我们送入机器学习进行训练和建模。</p>
+<p>随后，我们就可以通过训练好的模型，来判断当前用户的行为，是否为爬虫。</p>
+<p>当然，回归的模型是一个概率的判断，终究是存在误差的，但是在不断迭代和更新中，我们可以越来越接近100%准确率</p>
+<h3 id="在最后">在最后</h3>
+<ol>
+<li>低级过筛UA，不多解释</li>
+<li>在请求头中获取关键要素，比如所规定的入口Refer地址，SSL还可要求Auth，可以参见OAuth，算是一个模态的简易化版本吧</li>
+<li>在一个frame中收集用户信息请求接口进行人机判断，这也是cloudflare的方法</li>
+<li>根据返回进行服务端决策是否放行请求</li>
+</ol>
+<p>人工智能会慢慢贯穿我们的生活，在未来，我们可能不需要什么爬虫，甚至不需要什么反爬，因为，数据几乎都以透明，人工智能会提供我们所需的绝大部分信息，我们要做的，是正确接待信息。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#0x01%E7%88%AC%E8%99%AB">0x01爬虫</a></li>
+<li><a href="#0x02%E9%98%B2%E5%BE%A1%E7%88%AC%E8%99%AB">0x02防御爬虫</a>
+<ul>
+<li><a href="#0x001%E7%89%B9%E5%BE%81">0x001特征</a></li>
+<li><a href="#0x002%E5%81%B7%E6%A2%81%E6%8D%A2%E6%9F%B1">0x002偷梁换柱</a></li>
+<li><a href="#0x003%E6%9A%97%E6%B8%A1%E9%99%88%E4%BB%93">0x003暗渡陈仓</a></li>
+</ul>
+</li>
+<li><a href="#0x03%E8%A1%8C%E5%88%99%E5%B0%86%E8%87%B3">0x03行则将至</a>
+<ul>
+<li><a href="#%E8%AE%A9%E6%88%91%E4%BB%AC%E5%81%87%E8%AE%BE">让我们假设</a></li>
+<li><a href="#%E5%9C%A8%E6%9C%80%E5%90%8E">在最后</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

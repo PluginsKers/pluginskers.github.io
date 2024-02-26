@@ -1,0 +1,253 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>已完结的Puppeteer学习经验与踩坑 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="已完结的Puppeteer学习经验与踩坑 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="有项目需要用到无头浏览器, 其实就是爬虫, 我选择了puppeteer结果踩了一堆坑。
+
+关于这个西瓜皮
+其实不难猜，和爬虫挂钩的那无非就是无头浏览器。
+Puppeteer已经是蛮成熟的一个无头了，几乎能满足开发的所有需求，而且该项目由Go..." />
+    <meta name="keywords" content="爬虫,puppeteer,node,spider" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              已完结的Puppeteer学习经验与踩坑
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-07-12
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/g8F-26Ik0z/" class="post-tag">
+                  # 爬虫
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/zwvwn7KMD1/" class="post-tag">
+                  # puppeteer
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/wdIjadC_Qb/" class="post-tag">
+                  # node
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/ngtewqGIrP/" class="post-tag">
+                  # spider
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>有项目需要用到无头浏览器, 其实就是爬虫, 我选择了puppeteer结果踩了一堆坑。</p>
+<!-- more -->
+<h2 id="关于这个西瓜皮">关于这个西瓜皮</h2>
+<p>其实不难猜，和爬虫挂钩的那无非就是无头浏览器。</p>
+<p><code>Puppeteer</code>已经是蛮成熟的一个无头了，几乎能满足开发的所有需求，而且该项目由Google团队开源长久维护，有着丰富的社区。（简而言之，你踩到的坑，别人都踩到过，如果！！哪一天你踩到了一个没有人踩到过得坑，那么务必来找我，哈哈哈哈哈）</p>
+<p>玩这个东西也挺久的了，在一些开源项目里有做过很多贡献，其中不乏有借了Puppeteer的光啊。</p>
+<h2 id="踩坑笔记">踩坑笔记</h2>
+<p>这里主要记录了，日常开发以及团队项目开发期间遇到的一些问题，所以这篇文章将处于长期更新维护的状态。<br>
+如有问题，欢迎底下评论区进行提问，博主24H在线，不出意外的话5分钟内会有回复的。</p>
+<h3 id="centos-的一些特殊配置">CentOS 的一些特殊配置</h3>
+<p>报错：</p>
+<pre><code class="language-txt">/../node_modules/puppeteer/.local-chromium/linux-515411/chrome-linux/chrome: error while loading shared libraries: libatk-bridge-2.0.so.0: cannot open shared object file: No such file or directory
+</code></pre>
+<p>按照他的意思是没有找到相关依赖库，这玩意简单了。</p>
+<p>CentOS解决方法：</p>
+<pre><code class="language-bash">sudo yum install atk java-atk-wrapper at-spi2-atk gtk3 libXt libdrm mesa-libgbm
+</code></pre>
+<h3 id="请求时出现-neterr_tunnel_connection_failed">请求时出现 net::ERR_TUNNEL_CONNECTION_FAILED</h3>
+<p>复现：</p>
+<ul>
+<li>可用代理（测试完整）</li>
+<li>完整请求头</li>
+</ul>
+<p>测试上百次依旧报错 <code>net::ERR_TUNNEL_CONNECTION_FAILED</code></p>
+<p>已查阅：<br>
+Windows10错误：<a href="https://answers.microsoft.com/en-us/windows/forum/all/getting-error-errtunnelconnectionfailed-while/f8d8b61f-a875-4d57-8a4f-3427a0e783c6">https://answers.microsoft.com/en-us/windows/forum/all/getting-error-errtunnelconnectionfailed-while/f8d8b61f-a875-4d57-8a4f-3427a0e783c6</a><br>
+Chrome错误：<a href="https://www.techbout.com/err-tunnel-connection-failed-error-in-chrome-39692/">https://www.techbout.com/err-tunnel-connection-failed-error-in-chrome-39692/</a><br>
+Puppeteer错误：<a href="https://vi.sandiegocsta.org/488310-puppeteer-chromium-proxy-err-tunnel-PDNJOM">https://vi.sandiegocsta.org/488310-puppeteer-chromium-proxy-err-tunnel-PDNJOM</a><br>
+Puppeteer错误：<a href="https://www.xknote.com/ask/60ef8c45582ca.html">https://www.xknote.com/ask/60ef8c45582ca.html</a></p>
+<p>最后。</p>
+<p>在<code>Puppeteer</code>的issues中找到相关记录，维护团队回复：</p>
+<blockquote>
+<p>Hey @Yom92 That error is coming straight from Chromium. There is not much we can do on our side.<br>
+具体参见：<a href="https://github.com/hardkoded/puppeteer-sharp/issues/1202#issuecomment-509187809">https://github.com/hardkoded/puppeteer-sharp/issues/1202#issuecomment-509187809</a></p>
+</blockquote>
+<p>要而论之。</p>
+<p>在需要代理的无头请求时，应当注意Chromium的特性，那么就没有其他的替代方案了。<br>
+对！我还没想到，如果你有，麻烦大佬下方评论区畅所欲言。</p>
+<h2 id="实现">实现</h2>
+<p>无头的作用想必大家都有所了解了，那么他能用来做些什么呢？<br>
+博主在这里尝试了几个简单的请求，不同于 axios 的是，Puppeteer 可以等待Dom和页面加载。</p>
+<p>博主常用该类来进行SEO词尾优化，提高命中率。</p>
+<h3 id="原神官网抓取和操作">原神官网抓取和操作</h3>
+<p>暂无更方便的获取cookie的办法，所以只能要求用户自己获取米游社的cookie，在请求的时候puppeteer携带cookie就能完成，角色查询，签到等任务。</p>
+<p>相关项目：</p>
+<p><a href="https://github.com/Le-niao/Yunzai-Bot">Le-niao/Yunzai-Bot</a></p>
+<p><a href="https://github.com/yoimiya-kokomi/miao-plugin">yoimiya-kokomi/miao-plugin</a></p>
+<p>剖析一下机器人即可，很巧妙的利用了无头进行图片渲染👍</p>
+<h3 id="无头渲染图片">无头渲染图片</h3>
+<p>作为Canvas的替代方法，顺便一提，应该没有人喜欢用Canvas去渲染图片吧？那叫一个折磨啊，H5不比画板香吗？</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AA%E8%A5%BF%E7%93%9C%E7%9A%AE">关于这个西瓜皮</a></li>
+<li><a href="#%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0">踩坑笔记</a>
+<ul>
+<li><a href="#centos-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E9%85%8D%E7%BD%AE">CentOS 的一些特殊配置</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E6%97%B6%E5%87%BA%E7%8E%B0-neterr_tunnel_connection_failed">请求时出现 net::ERR_TUNNEL_CONNECTION_FAILED</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a>
+<ul>
+<li><a href="#%E5%8E%9F%E7%A5%9E%E5%AE%98%E7%BD%91%E6%8A%93%E5%8F%96%E5%92%8C%E6%93%8D%E4%BD%9C">原神官网抓取和操作</a></li>
+<li><a href="#%E6%97%A0%E5%A4%B4%E6%B8%B2%E6%9F%93%E5%9B%BE%E7%89%87">无头渲染图片</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/streaming-rtmp-to-hls-using-obs/">
+              <h3 class="post-title">
+                搭建RTMP服务端与HLS流媒体使用OBS推流完成一个直播间
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

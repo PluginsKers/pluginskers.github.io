@@ -1,0 +1,629 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>谈谈ChatGPT和现在的LLM大语言模型 | PluginsKers&#39;s Blog</title>
+<link rel="shortcut icon" href="https://pluginskers.github.io/favicon.ico?v=1708945136848">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://pluginskers.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="谈谈ChatGPT和现在的LLM大语言模型 | PluginsKers&#39;s Blog - Atom Feed" href="https://pluginskers.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="我在2022年年末就知道了这东西，2022年底的略有名气，现在才2023刚开春，GPT-4了？
+我觉得程序员离把自己淘汰越来越近了。
+
+你可能想问 “不对啊，淘汰的也只是那些面向CV的程序员吧” 但其实不是的。
+GPT这个模型的出现就标注着..." />
+    <meta name="keywords" content="人工智能,ChatGPT,python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://pluginskers.github.io">
+  <img class="avatar" src="https://pluginskers.github.io/images/avatar.png?v=1708945136848" alt="">
+  </a>
+  <h1 class="site-title">
+    PluginsKers&#39;s Blog
+  </h1>
+  <p class="site-description">
+    凡心所向 素履所往🌊
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              谈谈ChatGPT和现在的LLM大语言模型
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-03-30
+              </span>
+              <span>
+                19 min read
+              </span>
+              
+                <a href="https://pluginskers.github.io/tag/uSKDD_1DX/" class="post-tag">
+                  # 人工智能
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/abODkExRIs/" class="post-tag">
+                  # ChatGPT
+                </a>
+              
+                <a href="https://pluginskers.github.io/tag/iNECIsxDPWY/" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>我在2022年年末就知道了这东西，2022年底的略有名气，现在才2023刚开春，GPT-4了？<br>
+我觉得程序员离把自己淘汰越来越近了。</p>
+<!-- more -->
+<p>你可能想问 “不对啊，淘汰的也只是那些面向CV的程序员吧” 但其实不是的。</p>
+<p>GPT这个模型的出现就标注着大数据时代的高光点终会落在上面了。较为通俗的话语是“通过前面的内容预测后面会是什么”</p>
+<h2 id="nlp语言大模型">NLP语言大模型</h2>
+<h3 id="仅3周测试">仅3周测试</h3>
+<p>这个信息对从事开发的人来说无疑是惊悚的。</p>
+<p>GPT-2是一种基于深度学习技术的自然语言处理模型，它可以生成高质量、流畅的文本内容。这种模型可以应用于多个领域，例如机器翻译、智能客服、舆情分析等。而在过去，训练这样的模型需要大量的数据和计算资源，并且需要经过<strong>漫长</strong>的调试和优化过程。</p>
+<p>在GPT-2发布后不久，就有人担心其可能被滥用或误用，例如用于制造虚假新闻、欺诈行为等。因此，OpenAI公司决定限制GPT-2的公开访问，并只向特定用户提供API接口。</p>
+<p>但是也仅仅测试了3周就完成了全部单元的测试。</p>
+<p>是钞能力吗？</p>
+<h3 id="gpt-4">GPT-4</h3>
+<p>他们是这么说的：</p>
+<blockquote>
+<p>We’ve created GPT-4, the latest milestone in OpenAI’s effort in scaling up deep learning. GPT-4 is a large multimodal model (accepting image and text inputs, emitting text outputs) that, while less capable than humans in many real-world scenarios, exhibits human-level performance on various professional and academic benchmarks.</p>
+</blockquote>
+<p>在信息输入后模型处理的过程中进行了输出类型的预测<br>
+处理广泛的编程任务，从编程挑战到现实世界的应用，从低级汇编到高级框架，从简单的数据结构到复杂的程序，如游戏。<br>
+对代码执行进行推理，模拟指令的效果，并用自然语言解释结果。<br>
+执行伪代码，这需要解释在任何编程语言中都无效的非正式和模糊的表达。</p>
+<p>潘多拉魔盒真的打开了吗？</p>
+<h3 id="中国有没有">中国有没有</h3>
+<p>假设国内有了，叫 Chatna。<br>
+第二天：社评，语言模型不能成为脱缰野马。<br>
+第三天：老胡认为，AI 生成的内容错误百出，将让互联网成为泥潭。<br>
+第四天：新闻，涉及多起侵权案件。<br>
+第五天：停业整顿。<br>
+第六天：根据相关法律法规和政策。。。未予显示。。。<br>
+实名认证。<br>
+审查交流内容。封号。<br>
+增加隐写水印。<br>
+This is Chatna.</p>
+<p>博主说一句：<strong>中国的NLP大模型至少落后世界2年了</strong></p>
+<h3 id="在未来">在未来</h3>
+<p>如果不会使用人工智能那么就等于不会使用百度。<br>
+如果你真的想要会用ChatGPT或者其他的GPT大模型，那么你需要知道GPT是什么，它是如何工作去读懂你的意思的，你可能觉得，这不就是一个语言模型，他有一个神经网络可以读懂你的意思那是不够的。</p>
+<h2 id="浅谈gpt">浅谈GPT</h2>
+<p>GPT是OpenAI的ChatGPT带火的，但是你要知道GPT已经出现了接近6年。<br>
+它通常指的是&quot;Generative Pre-trained Transformer&quot;（生成式预训练变换器）模型，是一种基于深度学习的自然语言处理（NLP）模型。<br>
+那么现在又有一个词**“Transformer”**</p>
+<h3 id="基本概念">基本概念</h3>
+<p>Transformer是一种广泛用于序列到序列任务的架构，由&quot;Attention is All You Need&quot;论文提出。该架构通过自注意力机制（self-attention）来捕捉输入序列中的上下文信息，实现了对长距离依赖关系的建模。</p>
+<p>打住！</p>
+<p>要学会使用GPT这时候已经足够了，既然它是&quot;Generative Pre-trained Transformer&quot;（生成式预训练变换器）模型，那么从某种意义上来说，它不太熟练更改已有的内容（如果知道BERT的掩码训练，这里应该秒懂）</p>
+<p>既然了解GPT和ChatGPT的基本概念是学习使用它们的第一步。<br>
+首先需要明确，GPT模型都基于机器学习，那么是不是还需要进行学习机器学习再而学习transformers或者tensorflow？</p>
+<h2 id="举个栗子">举个栗子🌰</h2>
+<h3 id="单样本微调给chatglm2注入知识">单样本微调给ChatGLM2注入知识</h3>
+<p>summary:</p>
+<p>(1) 只需要1条样本，很少的训练时间，就可以通过微调给LLM注入知识。</p>
+<p>(2) LLM是一种类似<code>Key-Value</code>形式的知识数据库，支持增删改查。通过微调可以增删修改知识，通过条件生成可以查询提取知识。</p>
+<p>(3) <strong>LoRA微调</strong>是一种高效的融入学习算法。类似人类把新知识融入现有知识体系的学习过程。学习时无需新知识特别多的样本，学习后原有的庞大知识和能力可以基本不受影响。</p>
+<p>微调前：</p>
+<figure data-type="image" tabindex="1"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908230816.png" alt="20230908230816" loading="lazy"></figure>
+<p>微调后：</p>
+<figure data-type="image" tabindex="2"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908230827.png" alt="20230908230827" loading="lazy"></figure>
+<pre><code class="language-python"># 导入常用模块
+import numpy as np
+import pandas as pd 
+import torch
+from torch import nn 
+from torch.utils.data import Dataset, DataLoader 
+</code></pre>
+<pre><code class="language-python"># 配置参数
+from argparse import Namespace
+cfg = Namespace()
+
+#dataset
+cfg.prompt_column = 'prompt'
+cfg.response_column = 'response'
+cfg.history_column = None
+cfg.source_prefix = '' #添加到每个prompt开头的前缀引导语
+
+cfg.max_source_length = 128 
+cfg.max_target_length = 128
+
+#model
+cfg.model_name_or_path = 'chatglm2-6b'  #远程'THUDM/chatglm-6b' 
+cfg.quantization_bit = None #仅仅预测时可以选 4 or 8 
+
+
+#train
+cfg.epochs = 100 
+cfg.lr = 5e-3
+cfg.batch_size = 1
+cfg.gradient_accumulation_steps = 16 #梯度累积
+</code></pre>
+<h4 id="预训练模型">预训练模型</h4>
+<pre><code class="language-python">import transformers
+from transformers import  AutoModel,AutoTokenizer,AutoConfig,DataCollatorForSeq2Seq
+
+
+config = AutoConfig.from_pretrained(cfg.model_name_or_path, trust_remote_code=True)
+
+tokenizer = AutoTokenizer.from_pretrained(
+    cfg.model_name_or_path, trust_remote_code=True)
+
+model = AutoModel.from_pretrained(
+    cfg.model_name_or_path,
+    config=config,
+    trust_remote_code=True
+  ).half() 
+
+#先量化瘦身
+if cfg.quantization_bit is not None:
+    print(f&quot;Quantized to {cfg.quantization_bit} bit&quot;)
+    model = model.quantize(cfg.quantization_bit)
+    
+#再移动到GPU上
+model = model.cuda()
+</code></pre>
+<pre><code class="language-python"># 通过注册jupyter魔法命令可以很方便地在jupyter中测试ChatGLM 
+from torchkeras.chat import ChatGLM 
+chatglm = ChatGLM(model,tokenizer)
+</code></pre>
+<blockquote>
+<p>你知道梦中情炉吗？<br>
+“梦中情炉”在我所掌握的信息中并没有被提及或描述过。请问您需要了解什么关于“梦中情炉”的信息吗？</p>
+<p>介绍一下梦中情炉<br>
+很抱歉，在我所掌握的信息中并没有关于“梦中情炉”的相关描述。如果您需要了解关于炉子的信息，我可以为您提供帮助。请告诉我您想了解关于炉子什么方面的信息，我会尽力为您提供帮助。</p>
+</blockquote>
+<h4 id="准备数据">准备数据</h4>
+<p>构造数据</p>
+<pre><code class="language-python">#定义一条知识样本~
+
+keyword = '梦中情炉'
+
+description = '''梦中情炉一般指的是炼丹工具torchkeras。
+这是一个通用的pytorch模型训练模版工具。
+torchkeras是一个三好炼丹炉：好看，好用，好改。
+她有torch的灵动，也有keras的优雅，并且她的美丽，无与伦比。
+所以她的作者一个有毅力的吃货给她取了一个别名叫做梦中情炉。'''
+
+#对prompt使用一些简单的数据增强的方法，以便更好地收敛。
+def get_prompt_list(keyword):
+    return [f'{keyword}', 
+            f'你知道{keyword}吗?',
+            f'{keyword}是什么？',
+            f'介绍一下{keyword}',
+            f'你听过{keyword}吗?',
+            f'啥是{keyword}？',
+            f'{keyword}是何物？',
+            f'何为{keyword}？',
+           ]
+
+data =[{'prompt':x,'response':description} for x in get_prompt_list(keyword) ]
+dfdata = pd.DataFrame(data)
+display(dfdata) 
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908231437.png" alt="20230908231437" loading="lazy"></figure>
+<pre><code class="language-python">import datasets 
+#训练集和验证集一样
+ds_train_raw = ds_val_raw = datasets.Dataset.from_pandas(dfdata)
+</code></pre>
+<h4 id="数据转换">数据转换</h4>
+<pre><code class="language-python">#这是支持 history列处理，并且按照batch预处理数据的方法。
+
+def preprocess(examples):
+    max_seq_length = cfg.max_source_length + cfg.max_target_length
+    model_inputs = {
+        &quot;input_ids&quot;: [],
+        &quot;labels&quot;: [],
+    }
+    for i in range(len(examples[cfg.prompt_column])):
+        if examples[cfg.prompt_column][i] and examples[cfg.response_column][i]:
+            query, answer = examples[cfg.prompt_column][i], examples[cfg.response_column][i]
+
+            history = examples[cfg.history_column][i] if cfg.history_column is not None else None
+            prompt = tokenizer.build_prompt(query, history)
+
+            prompt = cfg.source_prefix + prompt
+            a_ids = tokenizer.encode(text=prompt, add_special_tokens=True, truncation=True,
+                                     max_length=cfg.max_source_length)
+            b_ids = tokenizer.encode(text=answer, add_special_tokens=False, truncation=True,
+                                     max_length=cfg.max_target_length)
+
+            context_length = len(a_ids)
+            input_ids = a_ids + b_ids + [tokenizer.eos_token_id]
+            labels = [tokenizer.pad_token_id] * context_length + b_ids + [tokenizer.eos_token_id]
+
+            pad_len = max_seq_length - len(input_ids)
+            input_ids = input_ids + [tokenizer.pad_token_id] * pad_len
+            labels = labels + [tokenizer.pad_token_id] * pad_len
+            labels = [(l if l != tokenizer.pad_token_id else -100) for l in labels]
+            model_inputs[&quot;input_ids&quot;].append(input_ids)
+            model_inputs[&quot;labels&quot;].append(labels)
+    return model_inputs
+</code></pre>
+<pre><code class="language-python">ds_train = ds_train_raw.map(
+    preprocess,
+    batched=True,
+    num_proc=4,
+    remove_columns=ds_train_raw.column_names
+)
+
+ds_val = ds_val_raw.map(
+    preprocess,
+    batched=True,
+    num_proc=4,
+    remove_columns=ds_val_raw.column_names
+)
+</code></pre>
+<h4 id="构建管道">构建管道</h4>
+<pre><code class="language-python">data_collator = DataCollatorForSeq2Seq(
+    tokenizer,
+    model=None,
+    label_pad_token_id=-100,
+    pad_to_multiple_of=None,
+    padding=False
+)
+
+dl_train = DataLoader(ds_train,batch_size = cfg.batch_size,
+                      num_workers = 2, shuffle = True, collate_fn = data_collator 
+                     )
+dl_val = DataLoader(ds_val,batch_size = cfg.batch_size,
+                      num_workers = 2, shuffle = False, collate_fn = data_collator 
+                     )
+</code></pre>
+<pre><code class="language-python">for batch in dl_train:
+    break
+</code></pre>
+<pre><code class="language-python">print(len(dl_train))
+</code></pre>
+<h4 id="定义模型">定义模型</h4>
+<p>下面我们使用AdaLoRA方法来微调ChatGLM2，以便给模型注入和梦中情炉 torchkeras相关的知识。</p>
+<p>AdaLoRA是LoRA方法的一种升级版本，使用方法与LoRA基本一样。</p>
+<p>主要差异在于，在LoRA中不同训练参数矩阵的秩是一样的被固定的。</p>
+<p>但AdaLoRA中不同训练参数矩阵的秩是会在一定范围内自适应调整的，那些更重要的训练参数矩阵会分配到更高的秩。</p>
+<p>通常认为，AdaLoRA的效果会好于LoRA。</p>
+<pre><code class="language-python">from peft import get_peft_model, AdaLoraConfig, TaskType
+
+#训练时节约GPU占用
+model.config.use_cache=False
+model.supports_gradient_checkpointing = True  #
+model.gradient_checkpointing_enable()
+model.enable_input_require_grads()
+
+peft_config = AdaLoraConfig(
+    task_type=TaskType.CAUSAL_LM, inference_mode=False,
+    r=8,
+    lora_alpha=32, lora_dropout=0.1,
+    target_modules=[&quot;query&quot;, &quot;value&quot;]
+)
+
+peft_model = get_peft_model(model, peft_config)
+
+peft_model.is_parallelizable = True
+peft_model.model_parallel = True
+peft_model.print_trainable_parameters()
+</code></pre>
+<h4 id="训练模型">训练模型</h4>
+<p>我们使用我们的梦中情炉torchkeras来实现最优雅的训练循环~</p>
+<p>注意这里，为了更加高效地保存和加载参数，我们覆盖了KerasModel中的load_ckpt和save_ckpt方法，</p>
+<p>仅仅保存和加载可训练lora权重，这样可以避免加载和保存全部模型权重造成的存储问题。</p>
+<pre><code class="language-python">from torchkeras import KerasModel 
+from accelerate import Accelerator 
+
+class StepRunner:
+    def __init__(self, net, loss_fn, accelerator=None, stage = &quot;train&quot;, metrics_dict = None, 
+                 optimizer = None, lr_scheduler = None
+                 ):
+        self.net,self.loss_fn,self.metrics_dict,self.stage = net,loss_fn,metrics_dict,stage
+        self.optimizer,self.lr_scheduler = optimizer,lr_scheduler
+        self.accelerator = accelerator if accelerator is not None else Accelerator() 
+        if self.stage=='train':
+            self.net.train() 
+        else:
+            self.net.eval()
+    
+    def __call__(self, batch):
+        
+        #loss
+        with self.accelerator.autocast():
+            loss = self.net(input_ids=batch[&quot;input_ids&quot;],labels=batch[&quot;labels&quot;]).loss
+
+        #backward()
+        if self.optimizer is not None and self.stage==&quot;train&quot;:
+            self.accelerator.backward(loss)
+            if self.accelerator.sync_gradients:
+                self.accelerator.clip_grad_norm_(self.net.parameters(), 1.0)
+            self.optimizer.step()
+            if self.lr_scheduler is not None:
+                self.lr_scheduler.step()
+            self.optimizer.zero_grad()
+            
+        all_loss = self.accelerator.gather(loss).sum()
+        
+        #losses (or plain metrics that can be averaged)
+        step_losses = {self.stage+&quot;_loss&quot;:all_loss.item()}
+        
+        #metrics (stateful metrics)
+        step_metrics = {}
+        
+        if self.stage==&quot;train&quot;:
+            if self.optimizer is not None:
+                step_metrics['lr'] = self.optimizer.state_dict()['param_groups'][0]['lr']
+            else:
+                step_metrics['lr'] = 0.0
+        return step_losses,step_metrics
+    
+KerasModel.StepRunner = StepRunner 
+
+
+#仅仅保存lora相关的可训练参数
+def save_ckpt(self, ckpt_path='checkpoint', accelerator = None):
+    unwrap_net = accelerator.unwrap_model(self.net)
+    unwrap_net.save_pretrained(ckpt_path)
+    
+def load_ckpt(self, ckpt_path='checkpoint'):
+    self.net = self.net.from_pretrained(self.net.base_model.model,ckpt_path)
+    self.from_scratch = False
+    
+KerasModel.save_ckpt = save_ckpt 
+KerasModel.load_ckpt = load_ckpt 
+</code></pre>
+<pre><code class="language-python">optimizer = torch.optim.AdamW(peft_model.parameters(),lr=cfg.lr) 
+keras_model = KerasModel(peft_model,loss_fn = None,
+        optimizer=optimizer) 
+ckpt_path = 'single_chatglm2'
+</code></pre>
+<pre><code class="language-python">keras_model.fit(train_data = dl_train,
+                val_data = dl_val,
+                epochs=100,
+                patience=20,
+                monitor='val_loss',
+                mode='min',
+                ckpt_path = ckpt_path,
+                mixed_precision='fp16',
+                gradient_accumulation_steps = cfg.gradient_accumulation_steps
+               )
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908232021.png" alt="20230908232021" loading="lazy"></figure>
+<h4 id="验证模型">验证模型</h4>
+<pre><code class="language-python">from peft import PeftModel 
+ckpt_path = 'single_chatglm2'
+model_old = AutoModel.from_pretrained(&quot;chatglm2-6b&quot;,
+                                  load_in_8bit=False, 
+                                  trust_remote_code=True)
+peft_loaded = PeftModel.from_pretrained(model_old,ckpt_path).cuda()
+model_new = peft_loaded.merge_and_unload() #合并lora权重
+</code></pre>
+<pre><code class="language-python">chatglm = ChatGLM(model_new,tokenizer,max_chat_rounds=20) #支持多轮对话，可以从之前对话上下文提取知识。
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908232054.png" alt="20230908232054" loading="lazy"></figure>
+<h4 id="使用模型">使用模型</h4>
+<p>我们尝试触碰一下模型学到的知识的边界在哪里，并看一下模型的其它能力是否受到影响。</p>
+<p>为了直接测试模型提取知识的能力，我们关闭掉多轮对话功能，不让模型从上下文提取知识。</p>
+<figure data-type="image" tabindex="6"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908232120.png" alt="20230908232120" loading="lazy"></figure>
+<p>😂😂</p>
+<p>从这个测试中，我们可以看到模型能够注入和提取知识，并且注入知识后基本不会影响到旧知识。</p>
+<p>但是模型能够直接提取出知识的场景，必须是 问题 和我们训练时语义非常相似的情况。</p>
+<p>'what is 梦中情炉' 和 ‘这是个啥子意思哟:梦中情炉?’ 都是这样的例子。</p>
+<p>在以'以梦中情炉为主题，写一首优美的现代诗歌，要有激情，有感染力~' 和 'torchkeras是个啥子哦?' 的例子中，</p>
+<p>虽然我们的知识库中有梦中情炉，也就是torchkeras相关的知识，但是这两个问题和我们训练时候的语义相差很大，所以无法直接提取出来并应用相关的知识。</p>
+<p>从这个意义上说，LLM模型非常像一个key-value类型的知识数据库，这里的key是某种语义，而不是某个特定的词。</p>
+<p>通过微调，我们可以给这个知识数据库注入，删除，和修改知识（设计目标输出成我们需要的形式即可）。</p>
+<p>通过输入和训练时语义相近的提示词，我们可以从这个知识数据库中查询提取知识。</p>
+<p>只有查询提取知识到对话上下文之后，LLM才能够灵活地使用知识。</p>
+<h4 id="保存模型">保存模型</h4>
+<p>可以将模型和tokenizer，以及相关py文件都保存到一个新的路径，便于直接加载。</p>
+<pre><code class="language-python">save_path = &quot;chatglm2-6b-梦中情炉&quot;
+model_new.save_pretrained(save_path, max_shard_size='2GB')
+</code></pre>
+<pre><code class="language-python">tokenizer.save_pretrained(save_path) 
+&quot;&quot;&quot;
+('chatglm2-6b-梦中情炉/tokenizer_config.json',
+ 'chatglm2-6b-梦中情炉/special_tokens_map.json',
+ 'chatglm2-6b-梦中情炉/tokenizer.model',
+ 'chatglm2-6b-梦中情炉/added_tokens.json')
+&quot;&quot;&quot;
+</code></pre>
+<p>PS: 还需要将相关的py文件也复制过去。</p>
+<h3 id="总结延申">总结延申</h3>
+<p>演示了使用AdaLoRA算法，使用1条样本对ChatGLM2实施微调。几分钟就成功注入了&quot;梦中情炉&quot;有关的知识。</p>
+<p><strong>总结:</strong></p>
+<p>(1) 只需要1条样本，很少的训练时间，就可以通过微调给LLM注入知识。</p>
+<p>(2) LLM是一种知识数据库，支持增删改查。通过微调可以增删修改知识，通过条件生成可以查询提取知识。</p>
+<p>(3) LoRA微调是一种高效的融入学习算法。类似人类把新知识融入现有知识体系的学习过程。学习时无需新知识特别多的样本，学习后原有的庞大知识和能力可以基本不受影响。</p>
+<p><strong>问题:</strong></p>
+<p>(1) 如果我们有很多条例如几千几万条知识，如何才能比较高效地给LLM注入并确保每条都注入成功呢?</p>
+<p>第一种想法是常规的微调方法，我们把这些知识混合成一个数据集用LoRA进行微调。</p>
+<p>第二种方法是让LLM用单样本微调的方法一条知识一条知识地学习，确保学习成功了一条知识后合并LoRA权重再去学习下一条。</p>
+<p>出于人类学习的经验，我可能觉得第二种会更加高效且可靠。或者也可能某种中间方案会更好，例如几条或者几十条知识作为一个学习批次，学习完了后再去学习下一个。究竟哪种更好，需要我们去做实验尝试。</p>
+<p>(2) 如果说ChatGLM2-6b可以作为一种Key-Value结构的知识数据库，我们知道这个模型的参数权重规模大概是60亿，也就是6个G，那么这个数据库能够储存超过6个G比如10个G的知识信息吗？能够存储无限的知识信息吗也就是有存储上限吗？如果有上限的话，给它喂入超过其存储能力上限的知识，会发生什么呢？</p>
+<p>这个问题触碰到我认知的边界了，我尝试用直觉答一下。LLM应该能够存储远超过其参数权重规模的知识，因为它做的是一种压缩存储，并且压缩率很高。</p>
+<p>想想看训练时丢给它的几十上百个T的数据，它从中有效汲取的能够提取复现的知识肯定不止6个G，假设有120个G，那么压缩率就是20倍。</p>
+<p>如果把LLM作为一个知识数据库，那它肯定是有存储上限的。如果给他喂入超过其存储能力的数据会发生什么？我想应该是会发生一种类似KV表中的哈希冲突这样的问题。也就是一些旧知识会被遗忘。</p>
+<p>但是这种哈希冲突不是我们理解的那种随机发生的哈希冲突，而是那些语义最相似的key会发生冲突，这个过程和知识的更新或者说修改本质上是一个过程。从应用角度来看，这种冲突应该极难发生，并且相比随机的哈希冲突来看还是很良性的。</p>
+<p>(3) 为什么通过LoRA微调将新知识融入现有知识体系过程的中，既不需要新知识特别多的样本，同时学习后原有的庞大知识和能力可以不受影响呢？这么优良的特性是怎么发生的？</p>
+<p>实际上我们这个用LoRA算法来微调LLM注入新知识的过程 和 标准的使用LoRA算法微调StableDiffusion 炼制一个新角色或者炼制一种新画风的过程非常的类似。</p>
+<p>无论从原理还是结果上，都是只需要很少的新知识的样本，同时学习后模型原有的庞大知识和能力基本不受影响。</p>
+<p>这个事情的发生确实非常的神奇，非常的美妙，使得我们不得不思考一下背后的原因。</p>
+<p>我猜想这个美妙特性的发生是三个要素协同作用的结果。</p>
+<p>第一个要素是输入的区分性。</p>
+<p>在我们的例子中，我们的新知识的输入通过一个关键词'梦中情炉'来和已有知识体系进行区分。</p>
+<p>在StableDiffusion微调炼制新角色也是如此，你需要为你的新角色创建一个独特的名字。</p>
+<p>如果在输入上无法明显地区分新旧知识，那么这种和平融入就无法发生，会产生严重的冲突。</p>
+<p>第二个要素是预训练模型的抗破坏性。</p>
+<p>现在的大部分模型都引入了ResNet结构。拥有ResNet结构的模型本质上属于多个子模型的集成模型。</p>
+<p>即使你随机地改变其中一些层的权重，整个模型的输出不会有太大的变化。</p>
+<p>同时，训练过程中还使用了dropout，使得模型的抗破坏性进一步增强。</p>
+<p>对于旧知识对应的那些输入，即使有些本来相关的权重矩阵被新知识的微调随机地破坏了，输出也几乎不会受到影响。</p>
+<p>第三个要素是LoRA的正则性。</p>
+<p>LoRA微调的思想是学习两个小的低秩矩阵，用它们的乘积来作为大的参数矩阵需要改变的增量。</p>
+<figure data-type="image" tabindex="7"><img src="https://fastly.i5res.com/gh/PluginsKers/cdn/2023/20230908232319.png" alt="20230908232319" loading="lazy"></figure>
+<p>这个将增量参数矩阵低秩分解的过程实际上引入了很强的正则性。一方面减少了模型训练的难度，让模型更快地收敛。</p>
+<p>同时它可能在一定程度上，也会降低学习新知识的过程中过度调整模型权重，对旧知识产生影响的风险。</p>
+<p>但和第一个要素和第二个要素不同，这个特性对降低新旧知识的冲突应该不是最核心的，全参数微调往往也能够和平融合新旧知识。</p>
+<h2 id="首尾呼应">首尾呼应</h2>
+<p>没区别</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#nlp%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A8%A1%E5%9E%8B">NLP语言大模型</a>
+<ul>
+<li><a href="#%E4%BB%853%E5%91%A8%E6%B5%8B%E8%AF%95">仅3周测试</a></li>
+<li><a href="#gpt-4">GPT-4</a></li>
+<li><a href="#%E4%B8%AD%E5%9B%BD%E6%9C%89%E6%B2%A1%E6%9C%89">中国有没有</a></li>
+<li><a href="#%E5%9C%A8%E6%9C%AA%E6%9D%A5">在未来</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%85%E8%B0%88gpt">浅谈GPT</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%BE%E4%B8%AA%E6%A0%97%E5%AD%90">举个栗子🌰</a>
+<ul>
+<li><a href="#%E5%8D%95%E6%A0%B7%E6%9C%AC%E5%BE%AE%E8%B0%83%E7%BB%99chatglm2%E6%B3%A8%E5%85%A5%E7%9F%A5%E8%AF%86">单样本微调给ChatGLM2注入知识</a>
+<ul>
+<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">预训练模型</a></li>
+<li><a href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE">准备数据</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">数据转换</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E7%AE%A1%E9%81%93">构建管道</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B">定义模型</a></li>
+<li><a href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">训练模型</a></li>
+<li><a href="#%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9E%8B">验证模型</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9E%8B">使用模型</a></li>
+<li><a href="#%E4%BF%9D%E5%AD%98%E6%A8%A1%E5%9E%8B">保存模型</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93%E5%BB%B6%E7%94%B3">总结延申</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A6%96%E5%B0%BE%E5%91%BC%E5%BA%94">首尾呼应</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://pluginskers.github.io/post/new-year-2023-celebration/">
+              <h3 class="post-title">
+                转瞬即逝的一年，这一年的结尾
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://pluginskers.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
